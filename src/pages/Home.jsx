@@ -8,19 +8,19 @@ const Home = () => {
     <div className="bg-principalCol w-full overflow-hidden">
       {/* Este div corresponde al fondo de pantalla con imagen  */}
       <div className='h-screen w-screen bg-cover bg-center' style={{ backgroundImage: `url(${landing_cover})` }}>
-        <div className={`${styles.paddingX} ${styles.flexCenter} bg-thirdCol bg-opacity-70`}>
+        <div className={`${styles.paddingX} ${styles.flexCenter} bg-thirdCol bg-opacity-70 `}>
           <div className={`${styles.boxWidth}`}>
             <Navbar />
           </div>
         </div>
         {/*Sección de contenido principal homepage */}
-        <div className={`${styles.flexCenter} h-[90%] flex-col`}>
+        <div className={`${styles.flexCenter} h-[80%] flex-col`}>
           {/*Nombre del gimnasio llamativo en medio de la pantalla */}
           <div className={`${styles.boxWidth} ${styles.flexCenter}`}>
             <PrincipalContent />
           </div>
           {/*Footer pagina inicio (no general) */}
-          <div className='absolute inset-x-0 bottom-0 h-[190px] bg-thirdCol bg-opacity-70 hidden sm:block'>
+          <div className='absolute inset-x-0 bottom-0 h-1/4 bg-thirdCol bg-opacity-70 hidden sm:block'>
             <div className={`${styles.paddingX} ${styles.flexStart}`}>
               <div className={`${styles.boxWidth}`}>
                 <LinksSection/>

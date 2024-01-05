@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Home, Login, NotFound, UserRegistration, ModulesPanel } from "./pages/index";
 import { supabase_client } from "./services/api";
 import { useEffect } from "react";
@@ -6,17 +6,12 @@ import { useEffect } from "react";
 
 const App = () => {
   // const navigate = useNavigate();
-  // useEffect( () =>{
-  //    supabase_client.auth.onAuthStateChange((event,session) =>{
-  //     console.log(session)
-  //     if(!session){
-  //       navigate('/')
-  //     }
-  //     else{
-  //       navigate('/user-registration')
-  //     }
-  //    })
-  // },[navigate])
+  useEffect( () =>{
+     supabase_client.auth.onAuthStateChange((event,session) =>{
+      console.log(session,event)
+      
+     })
+  })
 
   return (
     <div>

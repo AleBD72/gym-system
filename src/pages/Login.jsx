@@ -3,12 +3,12 @@ import styles from "../style"
 
 const Login = () => {
   return (
-    <div className="bg-principalCol w-full h-screen">
-      <div className={`${styles.paddingX} ${styles.flexCenter}`}>
-        <div className={`${styles.boxWidth}`}> 
-          <LoginForm/>
+    <div className="bg-principalCol w-screen h-screen ">
+      <div className={`${styles.paddingX} ${styles.flexCenter} bg-principalCol`}>
+        <div className={`${styles.boxWidth} `}>
+          <LoginForm />
         </div>
-      </div>   
+      </div>
     </div>
   )
 }

@@ -14,6 +14,7 @@ import phone from "./phone.svg"
 import location from "./location.svg"
 import login_vector from "./login_vector.png"
 import password_reset from "./password_reset.png"
+import register_image from "./register_image.png"
 
 
 export {
@@ -32,6 +33,7 @@ export {
     phone,
     location,
     password_reset,
-    login_vector
+    login_vector,
+    register_image
 
 }
