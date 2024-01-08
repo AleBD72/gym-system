@@ -10,7 +10,13 @@ import Schedule from "./Schedule";
 import NotFound from "./NotFound";
 import UserRegistration from "./UserRegistration";
 import ModulesPanel from "./ModulesPanel";
-
+import ScheduleCreate from "./ScheduleCreate";
+import ScheduleUpdate from "./ScheduleUpdate";
+import UpdateProfile from "./UpdateProfile";
+import Assistance from "./Assistance";
+import Users from "./Users";
+import EmailValidation from "./EmailValidation";
+import Membership from "./Membership";
 
 
 export {
@@ -23,5 +29,13 @@ export {
     Schedule,
     NotFound,
     UserRegistration,
-    ModulesPanel
+    ModulesPanel,
+    ScheduleCreate,
+    ScheduleUpdate,
+    UpdateProfile,
+    Assistance,
+    Users,
+    EmailValidation,
+    Membership
+
 }

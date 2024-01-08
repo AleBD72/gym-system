@@ -152,3 +152,23 @@ export const contacts = [
   },
 ];
 
+//Opciones para comboBoxs
+
+export const diasOption = [
+  { label: 'Lunes', value: 'lunes' },
+  { label: 'Martes', value: 'martes' },
+  { label: 'Miércoles', value: 'miercoles' },
+  { label: 'Jueves', value: 'jueves' },
+  { label: 'Viernes', value: 'viernes' },
+  { label: 'Sábado', value: 'sabado' },
+];
+
+export const GenderOptions = [
+  {label: 'Femenino', value: 'mujer'},
+  {label: 'Masculino', value: 'hombre'}
+];
+
+export const MembershipType = [
+  {label: 'Anual', value: 'anual'},
+  {label: 'Mensual', value: 'mensual'},
+];

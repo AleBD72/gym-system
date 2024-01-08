@@ -8,14 +8,18 @@ import logo from "./logo.png";
 import instagram from "./instagram.svg";
 import whatsapp from "./whatsapp.svg";
 import facebook from "./facebook.svg";
-import logo_footer from "./logo_footer.png"
+import logo_footer from "./logo_footer.png";
 import mail from "./mail.svg";
-import phone from "./phone.svg"
-import location from "./location.svg"
-import login_vector from "./login_vector.png"
-import password_reset from "./password_reset.png"
-import register_image from "./register_image.png"
-
+import phone from "./phone.svg";
+import location from "./location.svg";
+import login_vector from "./login_vector.png";
+import password_reset from "./password_reset.png";
+import register_image from "./register_image.png";
+import scheduleImage from "./scheduleImage.png";
+import assistanceImage from "./asistanceImage.png";
+import NotFound from "./NotFound.png";
+import mailImage from "./mailImage.png";
+import membershipsImage from "./membershipsImage.png"
 
 export {
     dumbbel,
@@ -34,6 +38,10 @@ export {
     location,
     password_reset,
     login_vector,
-    register_image
-
+    register_image,
+    scheduleImage,
+    assistanceImage,
+    NotFound,
+    mailImage,
+    membershipsImage
 }
