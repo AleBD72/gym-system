@@ -19,7 +19,10 @@ import scheduleImage from "./scheduleImage.png";
 import assistanceImage from "./asistanceImage.png";
 import NotFound from "./NotFound.png";
 import mailImage from "./mailImage.png";
-import membershipsImage from "./membershipsImage.png"
+import membershipsImage from "./membershipsImage.png";
+import admin from "./admin.png";
+import profile from "./profile.png"
+import client from "./client.png"
 
 export {
     dumbbel,
@@ -43,5 +46,8 @@ export {
     assistanceImage,
     NotFound,
     mailImage,
-    membershipsImage
+    membershipsImage,
+    admin,
+    profile,
+    client
 }

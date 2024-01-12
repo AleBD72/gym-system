@@ -10,7 +10,7 @@ import EditEventForm from "./admin/EditEventForm";
 //Componnetes relacionados con la authenticación
 import LoginForm from "./authentication/LoginForm";
 import NewUserForm from "./authentication/NewUserForm"
-
+import LoginURLValidate from "./authentication/LoginURLValidate";
 //Componentes de uso comun
 import Button from "./common/Button";
 import Navbar from "./common/Navbar";
@@ -38,6 +38,7 @@ import PlanCard from "./home/PlanCard";
 
 export {
     AddUserForm,
+    LoginURLValidate,
     LoginForm,
     Button,
     Navbar,

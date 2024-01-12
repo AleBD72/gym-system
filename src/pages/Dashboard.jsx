@@ -1,9 +1,17 @@
-import React from 'react'
+import { Admin_Dashboard } from "../components/admin/AdminDashboard";
+import { User_Dashboard } from "../components/user/UserDashboard";
 
-const Dashboard = () => {
+const UserDashboard = () => {
   return (
-    <div>Dashboard</div>
+    <User_Dashboard/>
   )
 }
 
-export default Dashboard
+const AdminDashboard = () => {
+  return <Admin_Dashboard />;
+};
+
+export{
+  UserDashboard,
+  AdminDashboard
+}

@@ -5,6 +5,9 @@ import { useFormik } from "formik"
 import { LoginValidate } from "../../utils/validateForms";
 import { login_vector } from "../../assets";
 import styles, { layout } from "../../style";
+import { verificar_correo } from "../../services/firebase/functions/db/usuarios";
+import enviarEnlaceLogin from "../../services/firebase/functions/auth/enlaceMagico";
+import { Link } from "react-router-dom";
 
 const initialValues = {
   email: '',
@@ -14,11 +17,22 @@ const initialValues = {
 
 const LoginForm = () => {
 
-  const onSubmit = async (values) => {
-    console.log(values)
+  const onSubmit = async (values,{resetForm}) => {
+    let verificacion = await verificar_correo(values.email)
+    if (verificacion){
+      enviarEnlaceLogin(values.email);
+      localStorage.setItem("correo",values.email)
+      resetForm();
+    }
+    else{
+      console.error("Este correo no existe");
+
+    }
+    
+    
   }
 
-  const { handleChange, errors, handleSubmit } = useFormik({
+  const { handleChange, errors, handleSubmit,values,handleReset } = useFormik({
     initialValues,
     onSubmit,
     validationSchema: LoginValidate,
@@ -32,14 +46,14 @@ const LoginForm = () => {
         </h2>
         <p className={styles.paragraph}>Bienvenido! por favor ingresa tus credenciales</p>
 
-        <form onSubmit={handleSubmit}>
-          <TextInput label="Correo" placeholder="Ingresa tu correo" className="md:mt-20 mt-6" name='email' onChange={handleChange} />
+        <form onSubmit={handleSubmit} onReset={handleReset}>
+          <TextInput label="Correo" placeholder="Ingresa tu correo" className="md:mt-20 mt-6" name='email' onChange={handleChange} value={values.email} />
           <small className='text-red-500 font-poppins'>{errors?.email}</small>
           <div className="font-poppins mt-3 text-end md:text-[16px] text-[13px]">
             <p className="text-white">No tienes cuenta?
-              <a href="/user-registration" className="ml-1">
+              <Link to="/user-registration" className="ml-1">
                 <span className="text-secondaryCol">Registrate Aquí</span>
-              </a>
+              </Link>
             </p>
 
           </div>

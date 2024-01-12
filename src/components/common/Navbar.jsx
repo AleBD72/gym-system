@@ -3,6 +3,7 @@ import { useState } from "react"
 import { logo, menu, close } from "../../assets";
 import { navLinks } from "../../constants";
 import { Button } from "../index";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
@@ -23,9 +24,9 @@ const Navbar = () => {
         ))}
       </ul>
 
-      <a href="/login">
+      <Link to="/login">
       <Button styles={"ml-10 md:flex hidden bg-white"} label={"INICIAR SESIÓN"} />
-      </a>
+      </Link>
       
 
       {/*Esto correspone al responsive de la aplicación */}
@@ -53,9 +54,9 @@ const Navbar = () => {
               </li>
             ))}
             
-            <a href="/login">
+            <Link to="/login">
             <Button styles={" h-[40px] mt-4 bg-white"} label={"INICIAR SESIÓN"}/>
-            </a>
+            </Link>
 
           </ul>
 

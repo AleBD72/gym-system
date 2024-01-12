@@ -1,7 +1,8 @@
 //Archivo exportador general de pages (las importa en otro archivo en una sola línea)
 
-import Dashboar from "./Dashboard";
+import {AdminDashboard,UserDashboard} from "./Dashboard";
 import Home from "./Home";
+import Unauthorized from "./Unauthorized"
 import Login from "./Login";
 import News from "./News";
 import Payments from "./Payments";
@@ -17,25 +18,31 @@ import Assistance from "./Assistance";
 import Users from "./Users";
 import EmailValidation from "./EmailValidation";
 import Membership from "./Membership";
-
+import LoginURL from "./LoginURL";
+import Services from "./Services";
+import Stats from "./Stats";
 
 export {
-    Dashboar,
-    Home,
-    Login,
-    News,
-    Payments,
-    Profile,
-    Schedule,
-    NotFound,
-    UserRegistration,
-    ModulesPanel,
-    ScheduleCreate,
-    ScheduleUpdate,
-    UpdateProfile,
-    Assistance,
-    Users,
-    EmailValidation,
-    Membership
-
-}
+  AdminDashboard,
+  UserDashboard,
+  Unauthorized,
+  LoginURL,
+  Home,
+  Login,
+  News,
+  Payments,
+  Profile,
+  Schedule,
+  NotFound,
+  UserRegistration,
+  ModulesPanel,
+  ScheduleCreate,
+  ScheduleUpdate,
+  UpdateProfile,
+  Assistance,
+  Users,
+  EmailValidation,
+  Membership,
+  Services,
+  Stats
+};
