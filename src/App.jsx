@@ -1,15 +1,14 @@
-import { BrowserRouter, Routes, Route,Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import {
   Home,
   Login,
   NotFound,
   UserRegistration,
-  ModulesPanel,
   Schedule,
   ScheduleCreate,
   ScheduleUpdate,
   Profile,
-  UpdateProfile,
+  //UpdateProfile,
   Assistance,
   Users,
   Membership,
@@ -18,7 +17,9 @@ import {
   Payments,
   News,
   Services,
-  Stats
+  Stats,
+  ScheduleView,
+  ScheduleAdmin
 } from "./pages/index";
 
 import { AuthProvider } from "./context/AutProvider";
@@ -45,14 +46,14 @@ const App = () => {
           >
             <Route index element={<Navigate to="/usuario/home" />} />
             <Route path="home" element={<UserDashboard />}>
-            <Route path="panel" element={<ModulesPanel />} />
-            <Route path="assistance" element={<Assistance />}></Route>
-            <Route path="schedule" element={<Schedule />} />
-            <Route path="news" element={<News />}></Route>
-            <Route path="payments" element={<Payments />}></Route>
-            <Route path="profile-update" element={<UpdateProfile />}></Route>
+              <Route path="assistance" element={<Assistance />}></Route>
+              <Route path="schedule" element={<Schedule />} />
+              <Route path="news" element={<News />}></Route>
+              <Route path="suscription" element={<Payments />}></Route>
+              <Route path="profile-update" element={<Profile />}></Route>
+              <Route path="profile" element={<Profile />}></Route>
             </Route>
-            
+
 
             <Route path="*" element={<NotFound />} />
           </Route>
@@ -68,18 +69,21 @@ const App = () => {
             <Route index element={<Navigate to="/admin/home" />} />
             <Route path="home" element={<AdminDashboard />}>
               <Route path="user-roles" element={<Users />}></Route>
-              <Route path="schedule" element={<Schedule />}></Route>
+              <Route path="schedule" element={<ScheduleAdmin />}></Route>
+              <Route path="schedule-view" element={<ScheduleView />}></Route>
               <Route
                 path="schedule-create"
                 element={<ScheduleCreate />}
               ></Route>
               <Route
-                path="schedule-update"
+                path="schedule-update/:id"
                 element={<ScheduleUpdate />}
               ></Route>
+              <Route path="memberships" element={<Membership />}></Route>
               <Route path="membership-edit" element={<Membership />}></Route>
               <Route path="profile-update" element={<Profile />}></Route>
-              <Route path="payments" element={<Payments />}></Route>
+              <Route path="profile" element={<Profile />}></Route>
+              <Route path="suscriptions" element={<Payments />}></Route>
               <Route path="news" element={<News />}></Route>
               <Route path="services" element={<Services />}></Route>
               <Route path="stats" element={<Stats />}></Route>

@@ -12,6 +12,12 @@ const TableSchedule = ({ horarios }) => {
         return acumulador;
     }, {});
 
+    const hayEventos = Object.values(eventosPorDia).flat().length > 0
+
+    if(!hayEventos){
+        return <p className={`${styles.paragraph} text-center`}>No hay ningún evento programado</p>;
+    }
+
     return (
         <div className="font-poppins text-white w-full">
             <h2 className={`${styles.heading2Col}`}>Tabla de Horarios</h2>

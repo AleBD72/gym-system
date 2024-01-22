@@ -18,8 +18,8 @@ export const RegisterValidate = Yup.object().shape({
         // Validar que el número tenga exactamente 10 cifras
         return value && value.toString().length === 10;
     }),
-    //password: Yup.string().min(6, 'La contraseña debe tener mínimo 6 carcateres').required('Campo obligatorio'),
-    //confirmation: Yup.string().oneOf([Yup.ref('password'), null], 'Las contraseñas deben coincidir').required('Campo obligatorio'),
+    password: Yup.string().min(6, 'La contraseña debe tener mínimo 6 carcateres').required('Campo obligatorio'),
+    confirmation: Yup.string().oneOf([Yup.ref('password'), null], 'Las contraseñas deben coincidir').required('Campo obligatorio'),
     email: Yup.string().email('Correo no válido').required('Campo requerido'),
 });
 

@@ -1,6 +1,6 @@
 /*Vista de la ventana principal*/
 import styles from "../style";
-import { Navbar, PrincipalContent, LinksSection, Business, ServicesCaroucel, Memberships, Contacts, Footer } from "../components/index";
+import { Navbar, PrincipalContent, LinksSection, Business,  Memberships, Contacts, Footer } from "../components/index"; 
 import { landing_cover } from '../assets/index';
 
 const Home = () => {
@@ -35,7 +35,7 @@ const Home = () => {
       <div className={`bg-principalCol ${styles.paddingX} ${styles.flexStart}`}>
         <div className={`${styles.boxWidth}`}>
           <Business/>
-          <ServicesCaroucel/>
+          {/* <CarouselServices/> */}
           <Memberships />
           <Contacts/>
           <Footer/>

@@ -155,12 +155,12 @@ export const contacts = [
 //Opciones para comboBoxs
 
 export const diasOption = [
-  { label: 'Lunes', value: 'lunes' },
-  { label: 'Martes', value: 'martes' },
-  { label: 'Miércoles', value: 'miercoles' },
-  { label: 'Jueves', value: 'jueves' },
-  { label: 'Viernes', value: 'viernes' },
-  { label: 'Sábado', value: 'sabado' },
+  { label: 'Lunes', value: 'Lunes' },
+  { label: 'Martes', value: 'Martes' },
+  { label: 'Miércoles', value: 'Miércoles' },
+  { label: 'Jueves', value: 'Jueves' },
+  { label: 'Viernes', value: 'Viernes' },
+  { label: 'Sábado', value: 'Sábado' },
 ];
 
 export const GenderOptions = [

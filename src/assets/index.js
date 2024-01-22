@@ -21,8 +21,9 @@ import NotFound from "./NotFound.png";
 import mailImage from "./mailImage.png";
 import membershipsImage from "./membershipsImage.png";
 import admin from "./admin.png";
-import profile from "./profile.png"
-import client from "./client.png"
+import profile from "./profile.png";
+import client from "./client.png";
+import logout from "./logout.svg";
 
 export {
     dumbbel,
@@ -49,5 +50,6 @@ export {
     membershipsImage,
     admin,
     profile,
-    client
+    client,
+    logout
 }

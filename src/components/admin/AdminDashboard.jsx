@@ -2,6 +2,7 @@ import { Link, Navigate, Outlet, useLocation } from "react-router-dom";
 import { AuthContext } from "../../context/AutProvider";
 import { useContext } from "react";
 import { admin, profile } from "../../assets";
+import { cerrarSesion } from "../../services/firebase/functions/auth/cerrar_sesion";
 
 export const Admin_Dashboard = () => {
   const location = useLocation();
@@ -35,10 +36,11 @@ export const Admin_Dashboard = () => {
           <li className="text-center">
             <Link
               to="/admin/home/profile-update"
-              className={`${urlActual === "/admin/home/profile-update"
-                ? "text-slate-200 bg-fifthCol px-3 py-2 rounded-md text-center font-poppins bg-opacity-65"
-                : "text-white font-poppins text-base"
-                } text-xl block mt-2 hover:text-white`}
+              className={`${
+                urlActual === "/admin/home/profile-update"
+                  ? "text-slate-200 bg-fifthCol px-3 py-2 rounded-md text-center font-poppins bg-opacity-65"
+                  : "text-white font-poppins text-base"
+              } text-xl block mt-2 hover:text-white`}
             >
               Perfil
             </Link>
@@ -47,10 +49,11 @@ export const Admin_Dashboard = () => {
           <li className="text-center">
             <Link
               to="/admin/home/user-roles"
-              className={`${urlActual === "/admin/home/user-roles"
-                ? "text-slate-200 bg-fifthCol px-3 py-2 rounded-md text-center font-poppins bg-opacity-65 "
-                : "text-white font-poppins text-base"
-                } text-xl block mt-2 hover:text-white`}
+              className={`${
+                urlActual === "/admin/home/user-roles"
+                  ? "text-slate-200 bg-fifthCol px-3 py-2 rounded-md text-center font-poppins bg-opacity-65 "
+                  : "text-white font-poppins text-base"
+              } text-xl block mt-2 hover:text-white`}
             >
               Modificar Roles
             </Link>
@@ -59,10 +62,11 @@ export const Admin_Dashboard = () => {
           <li className="text-center">
             <Link
               to="/admin/home/schedule"
-              className={`${urlActual === "/admin/home/schedule"
-                ? "text-slate-200 bg-fifthCol px-3 py-2 rounded-md text-center font-poppins bg-opacity-65"
-                : "text-white font-poppins text-base"
-                } text-xl block mt-2 hover:text-white`}
+              className={`${
+                urlActual === "/admin/home/schedule"
+                  ? "text-slate-200 bg-fifthCol px-3 py-2 rounded-md text-center font-poppins bg-opacity-65"
+                  : "text-white font-poppins text-base"
+              } text-xl block mt-2 hover:text-white`}
             >
               Horarios
             </Link>
@@ -70,11 +74,12 @@ export const Admin_Dashboard = () => {
 
           <li className="text-center">
             <Link
-              to="/admin/home/membership-edit"
-              className={`${urlActual === "/admin/home/membership-edit"
-                ? "text-slate-200 bg-fifthCol px-3 py-2 rounded-md text-center font-poppins bg-opacity-65"
-                : "text-white font-poppins text-base"
-                } text-xl block mt-2 hover:text-white`}
+              to="/admin/home/memberships"
+              className={`${
+                urlActual === "/admin/home/memberships"
+                  ? "text-slate-200 bg-fifthCol px-3 py-2 rounded-md text-center font-poppins bg-opacity-65"
+                  : "text-white font-poppins text-base"
+              } text-xl block mt-2 hover:text-white`}
             >
               Membresías
             </Link>
@@ -83,10 +88,11 @@ export const Admin_Dashboard = () => {
           <li className="text-center">
             <Link
               to="/admin/home/services"
-              className={`${urlActual === "/admin/home/services"
-                ? "text-slate-200 bg-fifthCol px-3 py-2 rounded-md text-center font-poppins bg-opacity-65"
-                : "text-white font-poppins text-base"
-                } text-xl block mt-2 hover:text-white`}
+              className={`${
+                urlActual === "/admin/home/services"
+                  ? "text-slate-200 bg-fifthCol px-3 py-2 rounded-md text-center font-poppins bg-opacity-65"
+                  : "text-white font-poppins text-base"
+              } text-xl block mt-2 hover:text-white`}
             >
               Servicios
             </Link>
@@ -95,10 +101,11 @@ export const Admin_Dashboard = () => {
           <li className="text-center">
             <Link
               to="/admin/home/news"
-              className={`${urlActual === "/admin/home/news"
-                ? "text-slate-200 bg-fifthCol px-3 py-2 rounded-md text-center font-poppins bg-opacity-65"
-                : "text-white font-poppins text-base"
-                } text-xl block mt-2 hover:text-white`}
+              className={`${
+                urlActual === "/admin/home/news"
+                  ? "text-slate-200 bg-fifthCol px-3 py-2 rounded-md text-center font-poppins bg-opacity-65"
+                  : "text-white font-poppins text-base"
+              } text-xl block mt-2 hover:text-white`}
             >
               Noticias
             </Link>
@@ -106,11 +113,12 @@ export const Admin_Dashboard = () => {
 
           <li className="text-center">
             <Link
-              to="/admin/home/payments"
-              className={`${urlActual === "/admin/home/payments"
-                ? "text-slate-200 bg-fifthCol px-3 py-2 rounded-md text-center font-poppins bg-opacity-65"
-                : "text-white font-poppins text-base"
-                } text-xl block mt-2 hover:text-white`}
+              to="/admin/home/suscriptions"
+              className={`${
+                urlActual === "/admin/home/suscriptions"
+                  ? "text-slate-200 bg-fifthCol px-3 py-2 rounded-md text-center font-poppins bg-opacity-65"
+                  : "text-white font-poppins text-base"
+              } text-xl block mt-2 hover:text-white`}
             >
               Suscripciones
             </Link>
@@ -119,15 +127,15 @@ export const Admin_Dashboard = () => {
           <li className="text-center">
             <Link
               to="/admin/home/stats"
-              className={`${urlActual === "/admin/home/stats"
-                ? "text-slate-200 bg-fifthCol px-3 py-2 rounded-md text-center font-poppins bg-opacity-65"
-                : "text-white font-poppins text-base"
-                } text-xl block mt-2 hover:text-white`}
+              className={`${
+                urlActual === "/admin/home/stats"
+                  ? "text-slate-200 bg-fifthCol px-3 py-2 rounded-md text-center font-poppins bg-opacity-65"
+                  : "text-white font-poppins text-base"
+              } text-xl block mt-2 hover:text-white`}
             >
               Análisis
             </Link>
           </li>
-
         </ul>
       </div>
 
@@ -151,7 +159,7 @@ export const Admin_Dashboard = () => {
               className=" text-white mr-3 text-md block hover:bg-red-900 text-center
                     bg-red-800 px-4 py-1 rounded-l font-poppins"
               onClick={() => {
-                localStorage.removeItem("token");
+                cerrarSesion();
               }}
             >
               Salir
@@ -163,11 +171,10 @@ export const Admin_Dashboard = () => {
         </div>
         <div className="bg-principalCol h-12 bg-opacity-95">
           <p className="text-center text-slate-100 leading-[2.9rem] underline font-poppins">
-            Todos los derechos reservados: FitnessHUB. 2023 Design by Camila Mier
+            Todos los derechos reservados FitnessHUB 2023 Design by Camila Mier
           </p>
         </div>
       </div>
     </div>
   );
 };
-

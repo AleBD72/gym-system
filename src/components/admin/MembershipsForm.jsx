@@ -30,6 +30,7 @@ const MembershipsForm = () => {
     return (
         <div className={`${layout.section} items-center justify-around translate-y-12 bg-principalCol`}>
             <div className=" m-2">
+                <h2 className={`${styles.heading2} text-center`}>Editar Membresías</h2>
                 <p className={styles.paragraph}>Bienvenido! Aquí puedes modificar la información de membresías </p>
 
                 <form onSubmit={handleSubmit}>

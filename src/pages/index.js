@@ -10,7 +10,6 @@ import Profile from "./Profile";
 import Schedule from "./Schedule";
 import NotFound from "./NotFound";
 import UserRegistration from "./UserRegistration";
-import ModulesPanel from "./ModulesPanel";
 import ScheduleCreate from "./ScheduleCreate";
 import ScheduleUpdate from "./ScheduleUpdate";
 import UpdateProfile from "./UpdateProfile";
@@ -21,6 +20,8 @@ import Membership from "./Membership";
 import LoginURL from "./LoginURL";
 import Services from "./Services";
 import Stats from "./Stats";
+import ScheduleView from "./ScheduleView";
+import ScheduleAdmin from "./ScheduleAdmin";
 
 export {
   AdminDashboard,
@@ -35,7 +36,6 @@ export {
   Schedule,
   NotFound,
   UserRegistration,
-  ModulesPanel,
   ScheduleCreate,
   ScheduleUpdate,
   UpdateProfile,
@@ -44,5 +44,7 @@ export {
   EmailValidation,
   Membership,
   Services,
-  Stats
+  Stats,
+  ScheduleView,
+  ScheduleAdmin
 };

@@ -13,6 +13,7 @@ export default {
         thirdCol: "#07393C",
         fourthCol: "#2C666E",
         fifthCol: "#90DDF0",
+        editCol: "#E7B10A",
         dimWhite: "rgba(255, 255, 255, 0.7)",
         dimBlue: "rgba(9, 151, 124, 0.1)",
       },

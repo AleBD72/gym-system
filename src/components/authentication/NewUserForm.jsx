@@ -6,14 +6,17 @@ import { register_image } from "../../assets";
 import { GenderOptions } from "../../constants";
 import { useState } from "react";
 import  {
-  create_user,
+  crear_usuario_firebase,
   verificar_rol,
 } from "../../services/firebase/functions/db/usuarios";
+import { useNavigate } from "react-router-dom";
 
 const initialValues = {
   email: "",
   name: "",
   last_name: "",
+  password :"",
+  confirmation :"",
   birth: "",
   cedula: "",
   rol: "2474007d-6849-4b62-b679-f00f878bc391",
@@ -21,27 +24,28 @@ const initialValues = {
 };
 
 const NewUserForm = () => {
- const [genero, setGenero] = useState("");
-
+  const [genero, setGenero] = useState("");
+  const navigate = useNavigate()
   const onSubmit = async (values, { resetForm }) => {
     try {
-      const RolValido = await verificar_rol(values.rol);
-     
+      const RolValido = await verificar_rol(values.rol); 
         if (RolValido) {
-          create_user(
+          const creacion_usuario = await crear_usuario_firebase(
+            values.email,
+            values.password,
             values.name,
             values.last_name,
-            values.email,
             values.birth,
             values.rol,
             genero,
             values.cedula
           );
           resetForm();
+          console.log(creacion_usuario)
+          if(creacion_usuario == true){
+             navigate("/login");
+          }
         }
-      
-    
-     
     } catch (error) {
       console.log(error);
     }
@@ -71,7 +75,7 @@ const NewUserForm = () => {
         <form onSubmit={handleSubmit} onReset={handleReset}>
           <TextInput
             label="Correo"
-            placeholder="Ingrese el correo del usuario"
+            placeholder="Ingresa tu correo"
             className="mt-4"
             name="email"
             value={values.email}
@@ -79,8 +83,27 @@ const NewUserForm = () => {
           />
           <small className="text-red-500 font-poppins">{errors?.email}</small>
           <TextInput
+            label="Contraseña"
+            placeholder="Ingrese la contraseña"
+            className="mt-4"
+            name="password"
+            value={values.password}
+            type="password"
+            onChange={handleChange}
+          />
+          <small className="text-red-500 font-poppins">{errors?.password}</small>
+          <TextInput
+            label="Confirmar Contraseña"
+            placeholder="Ingrese la contraseña nuevamente"
+            className="mt-4"
+            name="confirmation"
+            type="password"
+            onChange={handleChange}
+          />
+          <small className="text-red-500 font-poppins">{errors?.confirmation}</small>
+          <TextInput
             label="Nombre"
-            placeholder="Ingresa el nombre"
+            placeholder="Ingresa tu nombre"
             className="mt-4"
             name="name"
             value={values.name}
@@ -89,15 +112,13 @@ const NewUserForm = () => {
           <small className="text-red-500 font-poppins">{errors?.name}</small>
           <TextInput
             label="Apellido"
-            placeholder="Ingresa el apellido"
+            placeholder="Ingresa tu apellido"
             className="mt-4"
             name="last_name"
             value={values.last_name}
             onChange={handleChange}
           />
-          <small className="text-red-500 font-poppins">
-            {errors?.last_name}
-          </small>
+          <small className="text-red-500 font-poppins">{errors?.last_name}</small>
           <TextInput
             label="Fecha de Nacimiento"
             className="mt-4"
@@ -109,7 +130,7 @@ const NewUserForm = () => {
           <small className="text-red-500 font-poppins">{errors?.birth}</small>
           <TextInput
             label="Cédula"
-            placeholder="Ingresa la cédula"
+            placeholder="Ingresa tu identificación"
             className="mt-4"
             name="cedula"
             value={values.cedula}
