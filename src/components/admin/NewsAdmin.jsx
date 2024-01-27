@@ -1,7 +1,8 @@
 import NewsTable from "./NewsTable"
 import { useState } from 'react';
+import { Link } from "react-router-dom";
 
-const NewsAdmin = ({ news, onDelete, onEdit, onCreate }) => {
+const NewsAdmin = ({ news, onDelete }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const newsPerPage = 7;
@@ -32,22 +33,22 @@ const NewsAdmin = ({ news, onDelete, onEdit, onCreate }) => {
                 <div>
                     <button
                         className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 focus:outline-none font-poppins md:mt-0 mt-2 ml-1"
-                        onClick={onCreate}
                     >
                         Vista Previa
                     </button>
-                    <button
-                        className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 focus:outline-none font-poppins md:ml-3 ml-1 md:mt-0 mt-3 "
-                    >
-                        Nueva Noticia
-                    </button>
+                    <Link to='../new-create'>
+                        <button
+                            className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 focus:outline-none font-poppins md:ml-3 ml-1 md:mt-0 mt-3 "
+                        >
+                            Nueva Noticia
+                        </button>
+                    </Link>
                 </div>
 
             </div>
             <NewsTable
                 news={currentNews}
                 onDelete={onDelete}
-                onEdit={onEdit}
             />
             <div className="flex justify-center mt-4">
                 {Array.from({ length: Math.ceil(filteredNews.length / newsPerPage) }, (_, index) => (

@@ -101,18 +101,9 @@ export const User_Dashboard = () => {
       </div>
 
       <div className="flex-1 flex flex-col justify-between h-screen bg-principalCol">
-        <div className="bg-principalCol py-2 flex md:justify-end items-center gap-5 justify-center bg-opacity-95">
+        <div className="bg-principalCol py-2 flex md:justify-end items-center gap-5 justify-center bg-opacity-95 h-14">
           <div className="text-md font-mediaum text-slate-100 font-poppins">
-            Bienvenido - {auth?.nombre}
-          </div>
-          <div>
-            <img
-              src={profile}
-              alt="img-client"
-              className="border-2 border-green-600 rounded-full"
-              width={50}
-              height={50}
-            />
+            {auth?.nombre} {auth?.apellido}
           </div>
           <div>
             <Link

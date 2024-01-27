@@ -21,6 +21,7 @@ async function horariosFirebase(){
     }
     
 }
+
 async function obtenerHorarioPorCampoId(campoId) {
   const horariosRef = collection(db, "horario");
 
@@ -125,6 +126,7 @@ async function crear_evento(name, horaFin, horaInicio, entrenador, dia) {
     return false;
   }
 }
+
 async function editar_evento(id, nuevosDatos) {
   try {
     const docRef = doc(db, "horario", id);

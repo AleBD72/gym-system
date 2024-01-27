@@ -1,35 +1,37 @@
 import { NewsAdmin } from "../components"
 import styles from "../style"
+import { useState, useEffect } from "react"
+import { noticiasFirebase, eliminarNoticiaPorCampoId } from "../services/firebase/functions/db/noticias"
+
 
 const News = () => {
-  const news = [
-    { id: 1, titulo: 'Noticia 1', autor: 'Nombre Autor', fecha: '00-00-20XX', contenido: 'Descripción 1' },
-    { id: 2, titulo: 'Noticia 2', autor: 'Nombre Autor', fecha: '00-00-20XX', contenido: 'Descripción 2' },
-    { id: 3, titulo: 'Noticia 3', autor: 'Nombre Autor', fecha: '00-00-20XX', contenido: 'Descripción 3' },
-    { id: 4, titulo: 'Noticia 4', autor: 'Nombre Autor', fecha: '00-00-20XX', contenido: 'Descripción 4' },
-    { id: 5, titulo: 'Noticia 5', autor: 'Nombre Autor', fecha: '00-00-20XX', contenido: 'Descripción 5' },
-    { id: 6, titulo: 'Noticia 6', autor: 'Nombre Autor', fecha: '00-00-20XX', contenido: 'Descripción 6' },
-    { id: 7, titulo: 'Noticia 4', autor: 'Nombre Autor', fecha: '00-00-20XX', contenido: 'Descripción 4' },
-    { id: 8, titulo: 'Noticia 5', autor: 'Nombre Autor', fecha: '00-00-20XX', contenido: 'Descripción 5' },
-    { id: 9, titulo: 'Noticia 6', autor: 'Nombre Autor', fecha: '00-00-20XX', contenido: 'Descripción 6' },
-    { id: 10, titulo: 'Noticia 4', autor: 'Nombre Autor', fecha: '00-00-20XX', contenido: 'Descripción 4' },
-    { id: 11, titulo: 'Noticia 5', autor: 'Nombre Autor', fecha: '00-00-20XX', contenido: 'Descripción 5' },
-    { id: 12, titulo: 'Noticia 6', autor: 'Nombre Autor', fecha: '00-00-20XX', contenido: 'Descripción 6' },
-    //.. esta data es solo para ver el funcionamiento 
-  ];
+  //obetner datos a mostrar de la base de datos
+  const [noticias, setNoticias]= useState([]);
 
-  // Funciones para CRUD
+  useEffect(()=>{
+    const obtenerNoticias = async () =>{
+      try {
+        const noticiasObtenidas = await noticiasFirebase();
+        setNoticias(noticiasObtenidas)
+      } catch (error) {
+        console.error(error);
+        setNoticias([]);
+      }
+    }
+    obtenerNoticias();
+  })
+
+  // Funcion eliminar para CRUD
   const handleDelete = (id) => {
-    console.log(`Eliminar servicio con ID ${id}`);
+    const eliminar_noticia = eliminarNoticiaPorCampoId(id)
+    if (eliminar_noticia) {
+      console.log ('Se elimino la noticia correctamente');
+    } else {
+      console.log('Esta noticia tuvo problemas para eliminarse');
+    }
   };
 
-  const handleEdit = (id) => {
-    console.log(`Editar servicio con ID ${id}`);
-  };
-
-  const handleCreate = () => {
-    console.log('Crear nuevo servicio');
-  };
+  
 
   return (
     <div className={`${styles.paddingY} bg-principalCol w-full overflow-hidden`}>
@@ -37,10 +39,8 @@ const News = () => {
         <div className={`${styles.boxWidth} `}>
           <h2 className={`${styles.heading2} text-center mb-5`}>Administración de Noticias</h2>
           <NewsAdmin
-            news={news}
+            news={noticias}
             onDelete={handleDelete}
-            onEdit={handleEdit}
-            onCreate={handleCreate}
           />
         </div>
       </div>

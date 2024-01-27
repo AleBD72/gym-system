@@ -9,6 +9,7 @@ import {
   ScheduleUpdate,
   Profile,
   //UpdateProfile,
+  MembershipUpdate,
   Assistance,
   Users,
   Membership,
@@ -19,7 +20,12 @@ import {
   Services,
   Stats,
   ScheduleView,
-  ScheduleAdmin
+  ScheduleAdmin,
+  ServiceCreate,
+  ServiceUpdate,
+  NewCreate,
+  NewUpdate,
+  EditProfile
 } from "./pages/index";
 
 import { AuthProvider } from "./context/AutProvider";
@@ -50,7 +56,7 @@ const App = () => {
               <Route path="schedule" element={<Schedule />} />
               <Route path="news" element={<News />}></Route>
               <Route path="suscription" element={<Payments />}></Route>
-              <Route path="profile-update" element={<Profile />}></Route>
+              <Route path="profile-update" element={<EditProfile />}></Route>
               <Route path="profile" element={<Profile />}></Route>
             </Route>
 
@@ -80,12 +86,33 @@ const App = () => {
                 element={<ScheduleUpdate />}
               ></Route>
               <Route path="memberships" element={<Membership />}></Route>
+              <Route
+                path="membership-update/:id"
+                element={<MembershipUpdate />}
+              ></Route>
               <Route path="membership-edit" element={<Membership />}></Route>
-              <Route path="profile-update" element={<Profile />}></Route>
+              
+              <Route path="update-profile" element={<EditProfile />}></Route>
               <Route path="profile" element={<Profile />}></Route>
               <Route path="suscriptions" element={<Payments />}></Route>
               <Route path="news" element={<News />}></Route>
+              <Route
+                path="new-create"
+                element={<NewCreate />}
+              ></Route>
+              <Route
+                path="new-update/:id"
+                element={<NewUpdate />}
+              ></Route>
               <Route path="services" element={<Services />}></Route>
+              <Route
+                path="service-create"
+                element={<ServiceCreate />}
+              ></Route>
+              <Route
+                path="service-update/:id"
+                element={<ServiceUpdate />}
+              ></Route>
               <Route path="stats" element={<Stats />}></Route>
             </Route>
 

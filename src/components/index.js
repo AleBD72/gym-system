@@ -9,6 +9,10 @@ import MembershipsList from "./admin/MembershipsList";
 import ServicesAdmin from "./admin/ServicesAdmin";
 import NewsAdmin from "./admin/NewsAdmin";
 import SuscriptionsAdmin from "./admin/SuscriptionsAdmin";
+import CreateServiceForm from "./admin/CreateServiceForm";
+import EditServiceForm from "./admin/EditServiceForm";
+import CreateNewsForm from "./admin/CreateNewsForm";
+import EditNewsForm from "./admin/EditNewsForm";
 
 //Componnetes relacionados con la authenticación
 import LoginForm from "./authentication/LoginForm";
@@ -26,6 +30,7 @@ import UserCard from "./common/UserCard";
 import UserProfile from "./common/UserProfile";
 import Tabs from "./common/Tabs";
 import EditProfileForm from "./common/EditProfileForm";
+import TextArea from "./common/TextArea";
 
 //Componentes para usuarios clientes
 
@@ -72,5 +77,10 @@ export {
     ServicesAdmin,
     NewsAdmin,
     Tabs,
-    SuscriptionsAdmin
+    SuscriptionsAdmin, 
+    TextArea,
+    EditServiceForm,
+    CreateServiceForm,
+    EditNewsForm,
+    CreateNewsForm
 };

@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import ServicesTable from './ServicesTable';
+import { Link } from 'react-router-dom';
 
 
-const ServicesAdmin = ({ services, onDelete, onEdit, onCreate }) => {
+const ServicesAdmin = ({ services, onDelete }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const servicesPerPage = 7;
 
     // Filtra los servicios según el término de búsqueda
     const filteredServices = services.filter((service) =>
-        service.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+        service.servicio.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     // Calcula el índice del último servicio en la página actual
@@ -31,18 +32,19 @@ const ServicesAdmin = ({ services, onDelete, onEdit, onCreate }) => {
                     className="p-2 border border-gray-300 rounded mr-4 font-poppins"
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
-                <button
-                    className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 focus:outline-none font-poppins"
-                    onClick={onCreate}
-                >
-                    Nuevo Servicio
-                </button>
+                <Link to='../service-create'>
+                    <button
+                        className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 focus:outline-none font-poppins"
+                    >
+                        Nuevo Servicio
+                    </button>
+                </Link>
+                
                 
             </div>
             <ServicesTable
                 services={currentServices}
                 onDelete={onDelete}
-                onEdit={onEdit}
             />
             <div className="flex justify-center mt-4">
                 {Array.from({ length: Math.ceil(filteredServices.length / servicesPerPage) }, (_, index) => (

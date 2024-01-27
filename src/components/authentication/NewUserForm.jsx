@@ -21,6 +21,7 @@ const initialValues = {
   cedula: "",
   rol: "2474007d-6849-4b62-b679-f00f878bc391",
   genre: "",
+  status: "Inactivo"
 };
 
 const NewUserForm = () => {
@@ -38,7 +39,8 @@ const NewUserForm = () => {
             values.birth,
             values.rol,
             genero,
-            values.cedula
+            values.cedula,
+            values.status,
           );
           resetForm();
           console.log(creacion_usuario)
@@ -80,6 +82,7 @@ const NewUserForm = () => {
             name="email"
             value={values.email}
             onChange={handleChange}
+            type="email"
           />
           <small className="text-red-500 font-poppins">{errors?.email}</small>
           <TextInput

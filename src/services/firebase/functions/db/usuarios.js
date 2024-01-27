@@ -1,4 +1,4 @@
-import { addDoc, collection, query, where, getDocs } from "firebase/firestore";
+import { addDoc, collection, query, where, getDocs,updateDoc,doc } from "firebase/firestore";
 import { auth, db } from "../../config_firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import enviarEnlaceVerficacion from "../auth/verificacion_correo";
@@ -10,7 +10,8 @@ async function create_user(
   fecha_nacimiento,
   rol,
   genero,
-  cedula
+  cedula,
+  estado
 ) {
   const usuario_nuevo = {
     nombre,
@@ -20,6 +21,7 @@ async function create_user(
     rol,
     genero,
     cedula,
+    estado
   };
 
   const docRef = collection(db, "usuarios");
@@ -34,6 +36,7 @@ async function verificar_rol(roleId) {
   const querySnapshot = await getDocs(q);
   return !querySnapshot.empty;
 }
+
 async function crear_usuario_firebase(
   email,
   password,
@@ -42,7 +45,8 @@ async function crear_usuario_firebase(
   fecha_nacimiento,
   rol,
   genero,
-  cedula
+  cedula,
+  estado
 ) {
   const correo_existe = await verificar_correo(email);
   if (correo_existe) {
@@ -56,7 +60,8 @@ async function crear_usuario_firebase(
       fecha_nacimiento,
       rol,
       genero,
-      cedula
+      cedula,
+      estado
     );
 
     if (!datos_usuario_firebase) {
@@ -73,6 +78,7 @@ async function crear_usuario_firebase(
     }
   }
 }
+
 async function verificar_correo(email) {
   const usersCollection = collection(db, "usuarios");
   const q = query(usersCollection, where("email", "==", email));
@@ -93,10 +99,81 @@ async function obtener_datos_correo(email) {
   }
 }
 
+
+async function actualizar_datos_usuario(correo, nuevosDatos) {
+  const usuarioRef = collection(db, "usuarios");
+  try {
+    const querySnapshot = await getDocs(query(usuarioRef, where("email", "==", correo)));
+    
+    if (!querySnapshot.empty) {
+      const docSnapshot = querySnapshot.docs[0];
+      const usuarioId = docSnapshot.id; // Obtén el ID del documento, que puede ser usado para construir la referencia del documento
+
+      const usuarioDocRef = doc(db, "usuarios", usuarioId); // Utiliza el ID del documento para construir la referencia completa
+      await updateDoc(usuarioDocRef, nuevosDatos);
+
+      // Ahora puedes usar la función obtener_datos_correo con el ID del documento
+      const usuarioActualizado = await obtener_datos_correo(usuarioId);
+      return usuarioActualizado;
+    } else {
+      console.error('No existe este usuario');
+      return null;
+    }
+  } catch (error) {
+    console.error("Error al actualizar el usuario en Firebase:", error);
+    return null;
+  }
+}
+
+async function actualizarRolUsuario(correo, nuevoRol) {
+  const usuariosRef = collection(db, "usuarios");
+
+  try {
+    const querySnapshot = await getDocs(
+      query(usuariosRef, where("email", "==", correo))
+    );
+
+    if (!querySnapshot.empty) {
+      const docSnapshot = querySnapshot.docs[0];
+      const usuarioId = docSnapshot.id;
+
+      const usuarioDocRef = doc(db, "usuarios", usuarioId);
+      await updateDoc(usuarioDocRef, { rol: nuevoRol }); // Actualiza solo el campo "rol"
+
+      // Después de actualizar, puedes obtener los datos actualizados si es necesario
+      const usuarioActualizado = await obtener_datos_correo(correo);
+      return usuarioActualizado;
+    } else {
+      console.error("No existe este usuario");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error al actualizar el rol del usuario en Firebase:", error);
+    return null;
+  }
+}
+
+async function obtenerTodosLosUsuarios() {
+  const usersCollection = collection(db, "usuarios");
+  const q = query(usersCollection);
+  const querySnapshot = await getDocs(q);
+
+  const usuarios = [];
+
+  querySnapshot.forEach((doc) => {
+    usuarios.push(doc.data());
+  });
+
+  return usuarios;
+}
+
 export {
   create_user,
+  obtenerTodosLosUsuarios,
+  actualizarRolUsuario,
   verificar_rol,
   verificar_correo,
   obtener_datos_correo,
   crear_usuario_firebase,
+  actualizar_datos_usuario
 };

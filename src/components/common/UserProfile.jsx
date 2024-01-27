@@ -1,6 +1,7 @@
 //Código del perfil de un usuario
+import { Link } from "react-router-dom";
 
-const UserProfile = ({ user, onEditClick }) => {
+const UserProfile = ({ user }) => {
   return (
     <div className="container mx-auto p-4">
       <div className="bg-principalCol p-8 shadow-lg shadow-fifthCol rounded-md">
@@ -15,12 +16,14 @@ const UserProfile = ({ user, onEditClick }) => {
             <p className="text-dimWhite mb-3">Género: {user.gender}</p>
           </div>
         </div>
-        <button
-          onClick={onEditClick}
-          className="mt-4 bg-fifthCol hover:bg-secondaryCol text-white font-medium py-2 px-4 rounded font-poppins focus:outline-none focus:shadow-outline"
-        >
-          Editar Perfil
-        </button>
+        <Link to='../update-profile'>
+          <button
+            className="mt-4 bg-fifthCol hover:bg-secondaryCol text-white font-medium py-2 px-4 rounded font-poppins focus:outline-none focus:shadow-outline"
+          >
+            Editar Perfil
+          </button>
+        </Link>
+        
       </div>
     </div>
   );

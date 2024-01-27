@@ -57,6 +57,7 @@ const LoginForm = () => {
             label="Correo"
             placeholder="Ingresa tu correo"
             className="md:mt-20 mt-6"
+            type="email"
             name="email"
             onChange={handleChange}
             value={values.email}
@@ -78,7 +79,7 @@ const LoginForm = () => {
             <p className="text-white">
               No tienes cuenta?
               <Link to="/user-registration" className="ml-1">
-                <span className="text-secondaryCol">Registrate Aquí</span>
+                <span className="text-secondaryCol">Regístrate Aquí</span>
               </Link>
             </p>
           </div>

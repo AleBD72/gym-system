@@ -15,7 +15,7 @@ export const Admin_Dashboard = () => {
     <div className="md:flex md:min-h-screen ">
       <div className="md:w-1/5 bg-principalCol px-5 py-4 bg-opacity-95">
         <h2 className="text-4xl font-bold font-poppins text-center text-white">
-          FitnesHUB.
+          FitnessHUB.
         </h2>
 
         <img
@@ -35,9 +35,9 @@ export const Admin_Dashboard = () => {
         <ul className="mt-5">
           <li className="text-center">
             <Link
-              to="/admin/home/profile-update"
+              to="/admin/home/profile"
               className={`${
-                urlActual === "/admin/home/profile-update"
+                urlActual === "/admin/home/profile"
                   ? "text-slate-200 bg-fifthCol px-3 py-2 rounded-md text-center font-poppins bg-opacity-65"
                   : "text-white font-poppins text-base"
               } text-xl block mt-2 hover:text-white`}
@@ -140,18 +140,9 @@ export const Admin_Dashboard = () => {
       </div>
 
       <div className="flex-1 flex flex-col justify-between h-screen bg-principalCol">
-        <div className="bg-principalCol py-2 flex md:justify-end items-center gap-5 justify-center bg-opacity-95">
+        <div className="bg-principalCol py-2 flex md:justify-end items-center gap-5 justify-center bg-opacity-95 h-14">
           <div className="text-md font-mediaum text-slate-100 font-poppins">
             {auth?.nombre} {auth?.apellido}
-          </div>
-          <div>
-            <img
-              src={profile}
-              alt="img-client"
-              className="border-2 border-green-600 rounded-full"
-              width={50}
-              height={50}
-            />
           </div>
           <div>
             <Link

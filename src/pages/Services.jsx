@@ -1,35 +1,36 @@
 import { ServicesAdmin } from "../components"; //, CarouselServices
 import styles from "../style";
+import { useEffect, useState } from "react";
+import { serviciosFirebase, eliminarServicioPorCampoId } from "../services/firebase/functions/db/servicios";
+
 
 const Services = () => {
-  // Datos de ejemplo para mostrar en los componentes
-  const services = [
-    { id: 1, nombre: 'Servicio 1', descripcion: 'Descripción 1' },
-    { id: 2, nombre: 'Servicio 2', descripcion: 'Descripción 2' },
-    { id: 3, nombre: 'Servicio 3', descripcion: 'Descripción 3' },
-    { id: 4, nombre: 'Servicio 4', descripcion: 'Descripción 4' },
-    { id: 5, nombre: 'Servicio 5', descripcion: 'Descripción 5' },
-    { id: 6, nombre: 'Servicio 6', descripcion: 'Descripción 6' },
-    { id: 7, nombre: 'Servicio 4', descripcion: 'Descripción 4' },
-    { id: 8, nombre: 'Servicio 5', descripcion: 'Descripción 5' },
-    { id: 9, nombre: 'Servicio 6', descripcion: 'Descripción 6' },
-    { id: 10, nombre: 'Servicio 4', descripcion: 'Descripción 4' },
-    { id: 11, nombre: 'Servicio 5', descripcion: 'Descripción 5' },
-    { id: 12, nombre: 'Servicio 6', descripcion: 'Descripción 6' },
-    //.. esta data es solo para ver el funcionamiento 
-  ];
+  //Obtener datos a mostrar de la base de datos
+  const [servicios, setServicios] = useState([]);
+
+  useEffect(()=>{
+    const obtenerServicios = async () => {
+      try{
+        const serviciosObtenidos = await serviciosFirebase();
+        setServicios(serviciosObtenidos);
+      }catch(error){
+        console.error(error);
+        setServicios([]);
+      }
+    };
+    obtenerServicios();
+  }, [servicios])
+
+
 
   // Funciones para CRUD
-  const handleDelete = (id) => {
-    console.log(`Eliminar servicio con ID ${id}`);
-  };
-
-  const handleEdit = (id) => {
-    console.log(`Editar servicio con ID ${id}`);
-  };
-
-  const handleCreate = () => {
-    console.log('Crear nuevo servicio');
+  const handleDeleteServicio = (id) => {
+    const eliminar_servicio = eliminarServicioPorCampoId(id)
+    if(eliminar_servicio){
+      console.log('Se eliminó correctamente este servicio');
+    } else{
+      console.log('Este servicio no se ha eliminado');
+    }
   };
 
   return (
@@ -41,10 +42,9 @@ const Services = () => {
 
       {/* Componente para administración de servicios */}
       <ServicesAdmin
-        services={services}
-        onDelete={handleDelete}
-        onEdit={handleEdit}
-        onCreate={handleCreate}
+        services={servicios}
+        onDelete={handleDeleteServicio}
+        
       />
     </div>
   );

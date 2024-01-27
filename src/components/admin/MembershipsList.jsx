@@ -1,50 +1,61 @@
 //Vista para tabla edición de membresías mostradas en pagina principal
+import { useState, useEffect } from "react";
+import { membresiasFirebase } from "../../services/firebase/functions/db/membresias";
+import { Link } from "react-router-dom";
+
 
 const MembershipsList = () => {
-    const data = [
-        { id: 1, nombre: 'Producto 1', precio: '$10', tipo: 'Tipo 1', descripcion: 'Descripción 1' },
-        { id: 2, nombre: 'Producto 2', precio: '$20', tipo: 'Tipo 2', descripcion: 'Descripción 2' },
-        { id: 3, nombre: 'Producto 3', precio: '$30', tipo: 'Tipo 3', descripcion: 'Descripción 3' },
-      ];
+  const [membresias, setMembresias] = useState([]);
+
+  useEffect(()=>{
+    const obtenerMembresias = async () => {
+      try{
+        const membresiasObtenidas = await membresiasFirebase();
+        setMembresias(membresiasObtenidas);
+      }catch (error){
+        console.error(error);
+        setMembresias([]);
+      }
+    }
+    obtenerMembresias();
+  },[]);
     
-      const handleEdit = (id) => {
-        // Lógica para editar el registro con el ID proporcionado
-        console.log(`Editar registro con ID ${id}`);
-      };
+
     
-      return (
-        <div className="overflow-x-auto shadow-lg shadow-fifthCol rounded-md">
-          <table className="min-w-full bg-principalCol border text-center font-poppins  text-white ">
-            <thead>
-              <tr className="bg-gray-200 text-black">
-                <th className="py-4 px-4 border-b">Nombre</th>
-                <th className="py-4 px-4 border-b">Precio</th>
-                <th className="py-4 px-4 border-b">Tipo</th>
-                <th className="py-4 px-4 border-b">Descripción</th>
-                <th className="py-4 px-4 border-b">Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((item) => (
-                <tr key={item.id}>
-                  <td className="py-4 px-4 border-b">{item.nombre}</td>
-                  <td className="py-4 px-4 border-b text-fifthCol">{item.precio}</td>
-                  <td className="py-4 px-4 border-b">{item.tipo}</td>
-                  <td className="py-4 px-4 border-b">{item.descripcion}</td>
-                  <td className="py-4 px-4 border-b">
-                    <button
-                      className="bg-secondaryCol text-white px-4 py-1 mr-2 rounded focus:outline-none focus:shadow-outline-blue"
-                      onClick={() => handleEdit(item.id)}
-                    >
-                      Editar
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      );
+  return (
+    <div className="overflow-x-auto shadow-lg shadow-fifthCol rounded-md">
+      <table className="min-w-full bg-principalCol border text-center font-poppins  text-white ">
+        <thead>
+          <tr className="bg-gray-200 text-black">
+            <th className="py-4 px-4 border-b">Nombre</th>
+            <th className="py-4 px-4 border-b">Precio</th>
+            <th className="py-4 px-4 border-b">Tipo</th>
+            <th className="py-4 px-4 border-b">Descripción</th>
+            <th className="py-4 px-4 border-b">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {membresias.map((membresia) => (
+            <tr key={membresia.id}>
+              <td className="py-4 px-4 border-b">{membresia.nombre}</td>
+              <td className="py-4 px-4 border-b text-fifthCol">{membresia.precio}</td>
+              <td className="py-4 px-4 border-b">{membresia.tipo}</td>
+              <td className="py-4 px-4 border-b text-sm">{membresia.detalles}</td>
+              <td className="py-4 px-4 border-b">
+                <Link to={`../membership-update/${membresia.id}`}>
+                  <button
+                    className="bg-secondaryCol text-white px-4 py-1 mr-2 rounded focus:outline-none focus:shadow-outline-blue"
+                  >
+                    Editar
+                  </button>
+                </Link>       
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 }
 
 export default MembershipsList

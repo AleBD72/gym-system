@@ -164,11 +164,16 @@ export const diasOption = [
 ];
 
 export const GenderOptions = [
-  {label: 'Femenino', value: 'mujer'},
-  {label: 'Masculino', value: 'hombre'}
+  {label: 'Femenino', value: 'Femenino'},
+  {label: 'Masculino', value: 'Masculino'}
 ];
 
 export const MembershipType = [
-  {label: 'Anual', value: 'anual'},
-  {label: 'Mensual', value: 'mensual'},
+  {label: 'Anual', value: 'Anual'},
+  {label: 'Mensual', value: 'Mensual'},
+];
+
+export const UserState = [
+  {label: 'Activo', value: 'Activo'},
+  {label: 'Inactivo', value: 'Inactivo'},
 ];

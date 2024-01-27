@@ -12,7 +12,6 @@ import NotFound from "./NotFound";
 import UserRegistration from "./UserRegistration";
 import ScheduleCreate from "./ScheduleCreate";
 import ScheduleUpdate from "./ScheduleUpdate";
-import UpdateProfile from "./UpdateProfile";
 import Assistance from "./Assistance";
 import Users from "./Users";
 import EmailValidation from "./EmailValidation";
@@ -22,6 +21,12 @@ import Services from "./Services";
 import Stats from "./Stats";
 import ScheduleView from "./ScheduleView";
 import ScheduleAdmin from "./ScheduleAdmin";
+import MembershipUpdate from "./MembershipUpdate";
+import ServiceCreate from "./ServiceCreate";
+import ServiceUpdate from "./ServiceUpdate";
+import NewCreate from "./NewCreate";
+import NewUpdate from "./NewUpdate";
+import EditProfile from "./EditProfile";
 
 export {
   AdminDashboard,
@@ -38,7 +43,6 @@ export {
   UserRegistration,
   ScheduleCreate,
   ScheduleUpdate,
-  UpdateProfile,
   Assistance,
   Users,
   EmailValidation,
@@ -46,5 +50,11 @@ export {
   Services,
   Stats,
   ScheduleView,
-  ScheduleAdmin
+  ScheduleAdmin,
+  MembershipUpdate,
+  ServiceCreate,
+  ServiceUpdate,
+  NewCreate,
+  NewUpdate,
+  EditProfile
 };
