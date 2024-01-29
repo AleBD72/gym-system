@@ -7,6 +7,8 @@ import { GenderOptions } from "../../constants";
 import { useContext, useState,useEffect } from "react";
 import { AuthContext } from "../../context/AutProvider";
 import {actualizar_datos_usuario} from "../../services/firebase/functions/db/usuarios"
+import Swal from "sweetalert2";
+import { mostrarError, mostrarExito } from "../../utils/warnings";
 
 const initialValues = {
   email: "",
@@ -33,38 +35,56 @@ const EditProfileForm = () => {
     phone: auth.telefono || "",
     address: auth.direccion || "",
   };
+  
   const [user, setUser] = useState(initialUser);
-
-  
-
-  console.log('Correo '+ user)
-  
-  
   
   const onSubmit = async (values) => {
     if(values){
-      const datos_nuevos ={
-      email: values.email,
-      nombre: values.name,
-      apellido: values.last_name,
-      fecha_nacimiento: values.birth,
-      cedula: values.cedula,
-      genero: genero,
-      telefono: values.phone,
-      direccion: values.address
+      try {
+        const resultado = await Swal.fire({
+          icon: 'warning',
+          title: '¿Estás seguro?',
+          text: 'Esta acción actualizará tu perfil. ¿Estás seguro de continuar?',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sí, actualizar',
+          cancelButtonText: 'Cancelar',
+        });
+
+        if(resultado.isConfirmed){
+          const datos_nuevos ={
+            email: values.email,
+            nombre: values.name,
+            apellido: values.last_name,
+            fecha_nacimiento: values.birth,
+            cedula: values.cedula,
+            genero: genero,
+            telefono: values.phone,
+            direccion: values.address
+            }
+            const datos_actualizados =  actualizar_datos_usuario(values.email,datos_nuevos);
+            console.log(datos_actualizados);
+
+            if(datos_actualizados){
+               console.log("datos actualizados con éxito");
+               mostrarExito();
+               setTimeout(()=>{
+                 window.location.href = "../home/profile";
+               },2000)
+            }
+            else{
+              console.error("Hubo un problema al actualizar los datos");
+              mostrarError();
+            }
+        } else {
+          console.log("Operación de actualización cancelada");
+        }
+      } catch (error) {
+        console.error("Error al actualizar tu perfil", error);
+        mostrarError();
       }
-      const datos_actualizados =  actualizar_datos_usuario(values.email,datos_nuevos)
-      console.log(datos_actualizados)
-      if(datos_actualizados){
-         console.log("datos actualizados con éxito");
-         setTimeout(()=>{
-           window.location.href = "../home/profile";
-         },2000)
-        
-      }
-      else{
-        console.error("Hubo un problema al actualizar los datos")
-      }
+      
     }
   };
 
@@ -76,7 +96,6 @@ const EditProfileForm = () => {
     }
   );
 
-  const [contador, setContador] = useState(0);
   useEffect(()=>{
     if(user){
       setValues({
@@ -91,8 +110,6 @@ const EditProfileForm = () => {
 
       })
     }
-    console.log('Editar Perfil:'+ contador);
-    setContador(contador + 1);
   },[user,setValues])
 
   return (

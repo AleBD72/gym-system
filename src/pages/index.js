@@ -32,6 +32,7 @@ import SuscriptionUpdate from "./SuscriptionUpdate";
 import PasswordRecovery from "./PasswordRecovery";
 import NotFoundAdmin from "./NotFoundAdmin";
 import NotFoundClients from "./NotFoundClients";
+import SuscriptionUser from "./SuscriptionUser";
 
 
 export {
@@ -67,5 +68,6 @@ export {
   SuscriptionUpdate,
   PasswordRecovery,
   NotFoundAdmin,
-  NotFoundClients
+  NotFoundClients,
+  SuscriptionUser
 };

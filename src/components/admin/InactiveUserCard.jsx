@@ -14,7 +14,7 @@ const InactiveUserCard = ({ usuario, onEditarEstado }) => {
               <span className="text-fifthCol"> Correo: </span> {email}
             </p>
           </div>
-          <Link to='../activate-suscription'>
+          <Link to='../activate-suscription' state={{ email: email }}>
             <button
                 className="bg-fifthCol text-black font-medium font-poppins px-4 py-2 rounded-md hover:bg-gray-200"
             >

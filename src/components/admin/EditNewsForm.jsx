@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import styles, { layout } from "../../style";
 import { NewsValidate } from "../../utils/validateForms";
 import { TextInput, Button, TextArea } from "../index";
 import { useFormik } from "formik";
 import { actualizarNoticiaPorCampoId } from "../../services/firebase/functions/db/noticias";
+import { mostrarError, mostrarExito } from "../../utils/warnings";
+import Swal from "sweetalert2";
 
 const initialValues = {
   title: "",
@@ -14,24 +16,52 @@ const initialValues = {
 };
 
 const EditNewsForm = ({noticia}) => {
+
   const onSubmit = async (values) => {
     if (values) {
-      const datos_nuevos = {
-        titulo: values.title,
-        autor: values.autor,
-        fecha: values.date,
-        resumen: values.abstract,
-        contenido: values.content,
-      };
-      const datos_actualizados = actualizarNoticiaPorCampoId(
-        noticia.id,
-        datos_nuevos
-      );
-      if (datos_actualizados) {
-        console.log("datos actualizados con éxito");
-      } else {
-        console.error("No se actualizaron los datos, intenta de nuevo");
+      try {
+        const resultado = await Swal.fire({
+          icon: 'warning',
+          title: '¿Estás seguro?',
+          text: 'Esta acción actualizará la noticia. ¿Estás seguro de continuar?',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sí, actualizar',
+          cancelButtonText: 'Cancelar',
+        });
+
+        if(resultado.isConfirmed){
+          const datos_nuevos = {
+            titulo: values.title,
+            autor: values.autor,
+            fecha: values.date,
+            resumen: values.abstract,
+            contenido: values.content,
+          };
+          
+          const datos_actualizados = actualizarNoticiaPorCampoId(
+            noticia.id,
+            datos_nuevos
+          );
+          
+          if (datos_actualizados) {
+            console.log("datos actualizados con éxito");
+            mostrarExito();
+          } else {
+            console.error("No se actualizaron los datos, intenta de nuevo");
+            mostrarError();
+          }
+        }else{
+          console.log("Operación de actualización cancelada");
+        }
+      } catch (error) {
+        console.error("Error al actualizar la membresía", error);
+        mostrarError();
       }
+      
+    } else {
+      console.log("No sirve");
     }
   };
 
@@ -43,7 +73,7 @@ const EditNewsForm = ({noticia}) => {
     }
   );
 
-  const [contador, setContador] = useState(0);
+
   useEffect(()=>{
     if(noticia){
       setValues({
@@ -54,8 +84,7 @@ const EditNewsForm = ({noticia}) => {
         content: noticia.contenido || ""
       })
     }
-    console.log('Editar noticia:'+ contador);
-    setContador(contador + 1);
+    
   }, [noticia, setValues])
 
   return (

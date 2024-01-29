@@ -6,6 +6,9 @@ import { membershipsImage } from "../../assets";
 import { MembershipType } from "../../constants";
 import { useState, useEffect } from "react";
 import { actualizarMembresiaPorCampoId } from "../../services/firebase/functions/db/membresias";
+import { mostrarError, mostrarExito } from "../../utils/warnings";
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.css';
 
 const initialValues = {
   name: "",
@@ -19,21 +22,48 @@ const MembershipsForm = ({ membresia }) => {
 
   const onSubmit = async (values) => {
     if (values) {
-      const datos_nuevos = {
-        nombre: values.name,
-        precio: values.value,
-        tipo: membership,
-        detalles: values.description,
-      };
-      const datos_actualizados = actualizarMembresiaPorCampoId(
-        membresia.id,
-        datos_nuevos
-      );
-      if (datos_actualizados) {
-        console.log("datos actualizados con éxito");
-        
-      } else {
-        console.error("No se actualizaron los datos prueba de nuevo");
+      try {
+        // Mostrar una advertencia antes de actualizar
+        const resultado = await Swal.fire({
+          icon: 'warning',
+          title: '¿Estás seguro?',
+          text: 'Esta acción actualizará la membresía. ¿Estás seguro de continuar?',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sí, actualizar',
+          cancelButtonText: 'Cancelar',
+        });
+  
+        if (resultado.isConfirmed) {
+          // Usuario confirmó la acción, realizar la actualización
+          const datos_nuevos = {
+            nombre: values.name,
+            precio: values.value,
+            tipo: membership,
+            detalles: values.description,
+          };
+  
+          const datos_actualizados = await actualizarMembresiaPorCampoId(
+            membresia.id,
+            datos_nuevos
+          );
+  
+          if (datos_actualizados) {
+            console.log("Datos actualizados con éxito");
+            mostrarExito();
+
+          } else {
+            console.error("No se actualizaron los datos, prueba de nuevo");
+            // Puedes mostrar una alerta de error si lo deseas
+            mostrarError();
+          }
+        } else {
+          console.log("Operación de actualización cancelada");
+        }
+      } catch (error) {
+        console.error("Error al actualizar la membresía", error);
+        mostrarError();
       }
     } else {
       console.log("No sirve");
@@ -46,7 +76,7 @@ const MembershipsForm = ({ membresia }) => {
     validationSchema: MembershipValidate,
   });
 
-  const [contador, setContador] = useState(0);
+  
 
   useEffect(() => {
     if (membresia) {
@@ -59,8 +89,7 @@ const MembershipsForm = ({ membresia }) => {
     } else {
       console.log("no sirve");
     }
-    console.log('Editar Membresía:'+ contador);
-    setContador(contador + 1);
+    
   }, [membresia, setMembership, setValues]);
 
   return (

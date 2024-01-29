@@ -4,6 +4,9 @@ import styles, {layout} from "../../style";
 import { TextInput, Button, TextArea } from "../index";
 import { useFormik } from "formik";
 import { actualizarServicioPorCampoId } from "../../services/firebase/functions/db/servicios";
+import { mostrarError, mostrarExito } from "../../utils/warnings";
+import Swal from "sweetalert2";
+
 
 
 const initialValues = {
@@ -14,19 +17,42 @@ const initialValues = {
 const EditServiceForm = ({ servicio }) => {
   const onSubmit = async (values) => {
     if (values) {
-      const datos_nuevos = {
-        servicio: values.service,
-        descripcion: values.description,
-      };
-      const datos_actualizados = actualizarServicioPorCampoId(
-        servicio.id,
-        datos_nuevos
-      );
-      if (datos_actualizados) {
-        console.log("Datos actualizados con éxito");
-      } else {
-        console.error("No se actualizaron los datos, intenta otra vez");
+      try {
+        const resultado = await Swal.fire({
+          icon: 'warning',
+          title: '¿Estás seguro?',
+          text: 'Esta acción actualizará el servicio. ¿Estás seguro de continuar?',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sí, actualizar',
+          cancelButtonText: 'Cancelar',
+        });
+        
+        if (resultado.isConfirmed) {
+          const datos_nuevos = {
+            servicio: values.service,
+            descripcion: values.description,
+          };
+          const datos_actualizados = actualizarServicioPorCampoId(
+            servicio.id,
+            datos_nuevos
+          );
+          if (datos_actualizados) {
+            console.log("Datos actualizados con éxito");
+            mostrarExito();
+          } else {
+            console.error("No se actualizaron los datos, intenta otra vez");
+            mostrarError();
+          }
+        } else {
+          console.log("Operación de actualización cancelada");
+        }
+      } catch (error) {
+        console.error("Error al actualizar el servicio", error);
+        mostrarError();
       }
+      
     }
   };
 

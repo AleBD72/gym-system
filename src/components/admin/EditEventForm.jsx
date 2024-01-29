@@ -5,7 +5,8 @@ import { ScheduleValidate } from "../../utils/validateForms";
 import { diasOption } from "../../constants";
 import { useState, useEffect } from "react";
 import { actualizarHorarioPorCampoId } from "../../services/firebase/functions/db/horarios";
-import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import { mostrarError, mostrarExito } from "../../utils/warnings";
 
 const initialValues = {
   name: "",
@@ -21,22 +22,46 @@ const EditEventForm = ({ horario }) => {
 
   const onSubmit = async (values) => {
     if (values) {
-      const datos_nuevos = {
-        name: values.name,
-        dia: day,
-        entrenador: values.trainer,
-        horaFin: values.end,
-        horaInicio: values.start,
-      };
-      const datos_actualizados = actualizarHorarioPorCampoId(
-        horario.id,
-        datos_nuevos
-      );
-      if (datos_actualizados) {
-        console.log("datos actualizados con éxito");
-      } else {
-        console.error("No se actualizaron los datos prueba de nuevo");
+      try {
+        const resultado = await Swal.fire({
+          icon: 'warning',
+          title: '¿Estás seguro?',
+          text: 'Esta acción actualizará el evento. ¿Estás seguro de continuar?',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sí, actualizar',
+          cancelButtonText: 'Cancelar',
+        });
+
+        if (resultado.isConfirmed) {
+          const datos_nuevos = {
+            name: values.name,
+            dia: day,
+            entrenador: values.trainer,
+            horaFin: values.end,
+            horaInicio: values.start,
+          };
+          const datos_actualizados = actualizarHorarioPorCampoId(
+            horario.id,
+            datos_nuevos
+          );
+          if (datos_actualizados) {
+            console.log("datos actualizados con éxito");
+            mostrarExito();
+          } else {
+            console.error("No se actualizaron los datos prueba de nuevo");
+            mostrarError();
+          }
+        } else {
+          console.log("Operación de actualización cancelada");
+        }
+      } catch (error) {
+        console.error("Error al actualizar el servicio", error);
+        mostrarError();
       }
+    } else {
+      console.log("No sirve");
     }
   };
 

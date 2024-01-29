@@ -3,6 +3,7 @@ import { TextInput, Button, TextArea } from "../index";
 import { NewsValidate } from "../../utils/validateForms";
 import { useFormik } from "formik";
 import { crear_noticia } from "../../services/firebase/functions/db/noticias";
+import { mostrarError, mostrarExito } from "../../utils/warnings";
 
 
 const initialValues = {
@@ -15,18 +16,28 @@ const initialValues = {
 
 const CreateNewsForm = () => {
   const onSubmit = async (values, { resetForm }) => {
-    const datos_servicio = await crear_noticia(
-      values.title,
-      values.autor,
-      values.date,
-      values.abstract,
-      values.content,
-      
-    );
-    console.log(datos_servicio);
-    if (datos_servicio) {
-      resetForm();
+    try {
+      const datos_servicio = await crear_noticia(
+        values.title,
+        values.autor,
+        values.date,
+        values.abstract,
+        values.content,
+        
+      );
+      console.log(datos_servicio);
+      if (datos_servicio) {
+        resetForm();
+        mostrarExito();
+      }else{
+        console.error("No se creó la noticia, inténtalo de nuevo");
+        mostrarError();
+      }
+    } catch (error) {
+      console.error("Error al crear la noticia", error);
+      mostrarError();
     }
+    
   };
 
   const { handleChange, errors, handleSubmit, values, handleReset } = useFormik(

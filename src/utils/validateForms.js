@@ -73,7 +73,7 @@ export const NewsValidate = Yup.object().shape({
     title: Yup.string().min(6,'Mínimo 6 caracteres').max(25, 'Máximo 20 caracteres').required('Campo obligatorio'),
     autor: Yup.string().min(6,'Mínimo 6 caracteres').max(18, 'Máximo 20 caracteres').required('Campo obligatorio'),
     abstract: Yup.string().min(6,'Mínimo 6 caracteres').max(60, 'Máximo 20 caracteres').required('Campo obligatorio'),
-    content: Yup.string().min(30,'Mínimo 6 caracteres').max(700, 'Máximo 20 caracteres').required('Campo obligatorio'),
+    content: Yup.string().min(30,'Mínimo 30 caracteres').max(3000, 'Máximo 3000 caracteres').required('Campo obligatorio'),
     date: Yup.date().required('Campo obligatorio'),
 });
 

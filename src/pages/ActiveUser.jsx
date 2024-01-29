@@ -1,20 +1,35 @@
 import styles from "../style"
+import { useEffect, useState } from "react";
 import { SuscriptionsAdmin } from "../components"
+import { eliminarCamposYCambiarEstado, obtenerUsuariosActivos } from "../services/firebase/functions/db/usuarios"
+
 
 const ActiveUser = () => {
-    // Datos de ejemplo para mostrar en los componentes
-    const usersActive = [
-        { id: 1, nombre: 'Usuario 1', membresia: 'Membresía 1', metodoPago: 'Metodo de Pago', estado: 'Activo' },
-        { id: 2, nombre: 'Usuario 2', membresia: 'Membresía 2', metodoPago: 'Metodo de Pago', estado: 'Activo' },
-        { id: 3, nombre: 'Usuario 3', membresia: 'Membresía 3', metodoPago: 'Metodo de Pago', estado: 'Activo' },
-        { id: 4, nombre: 'Usuario 4', membresia: 'Membresía 1', metodoPago: 'Metodo de Pago', estado: 'Activo' },
-        { id: 5, nombre: 'Usuario 5', membresia: 'Membresía 2', metodoPago: 'Metodo de Pago', estado: 'Activo' },
-        { id: 6, nombre: 'Usuario 6', membresia: 'Membresía 3', metodoPago: 'Metodo de Pago', estado: 'Activo' },
-    ];
+    const [usersActive, setUsersActive] = useState([]);
+
+    useEffect(() => {
+       const obtenerUsuariosActivosFirebase = async () => {
+         // Llama a tu función para obtener usuarios activos desde Firestore
+         try {
+           const usuariosActivos = await obtenerUsuariosActivos();
+           setUsersActive(usuariosActivos); 
+         } catch (error) {
+           console.error(
+             "Error al obtener usuarios activos desde Firestore:",
+             error
+           );
+         }
+       };
+
+       obtenerUsuariosActivosFirebase();
+    }, []);
 
     //Función del CRUD
-    const handleEdit = (id) => {
-        console.log(`Editar servicio con ID ${id}`);
+    const handleDesactivar = async(id) => {
+        const datos_nuevos = await eliminarCamposYCambiarEstado(id)
+      console.log(datos_nuevos)
+      const usuariosActivos = await obtenerUsuariosActivos();
+      setUsersActive(usuariosActivos);
     };
 
     return (
@@ -24,7 +39,7 @@ const ActiveUser = () => {
             {/* Componente para administración de servicios */}
             <SuscriptionsAdmin
                 users={usersActive}
-                onEdit={handleEdit}
+                onDesactivar={handleDesactivar}
             />
         </div>
     )

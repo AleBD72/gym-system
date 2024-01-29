@@ -1,6 +1,6 @@
+import { Link } from "react-router-dom";
 
-
-const SuscriptionsTable = ({ users, onEdit }) => {
+const SuscriptionsTable = ({ users, onDesactivar }) => {
   // Verificar si users es undefined o no es un array
   if (!users || !Array.isArray(users)) {
     console.error("La prop 'users' es undefined o no es un array");
@@ -19,21 +19,23 @@ const SuscriptionsTable = ({ users, onEdit }) => {
       </thead>
       <tbody>
         {users.map((user) => (
-          <tr key={user.id}>
-            <td className="py-2 px-4 border-b text-white">{user.nombre}</td>
+          <tr key={user.email}>
+            <td className="py-2 px-4 border-b text-white">{user.nombre} {user.apellido}</td>
             <td className="py-2 px-4 border-b text-white text-sm">{user.membresia}</td>
-            <td className="py-2 px-4 border-b text-white text-sm">{user.metodoPago}</td>
-            <td className="py-2 px-4 border-b text-white text-sm">{user.estado}</td>
+            <td className="py-2 px-4 border-b text-white text-sm">{user.metodo_pago}</td>
+            <td className="py-2 px-4 border-b text-white text-sm">{user.status}</td>
             <td className="py-2 px-4 border-b">
-              <button
-                className="bg-secondaryCol text-white px-2 py-1 rounded mr-2 hover:bg-thirdCol focus:outline-none md:mb-0 mb-3"
-                onClick={() => onEdit(user.id)}
-              >
-                Editar
-              </button>
+              <Link to="../suscription-update" state={{email: user.email}}>
+                <button
+                  className="bg-secondaryCol text-white px-2 py-1 rounded mr-2 hover:bg-thirdCol focus:outline-none md:mb-0 mb-3"
+                >
+                  Editar
+                </button>
+              </Link>
+              
               <button
                 className="bg-red-800 text-white px-2 py-1 rounded hover:bg-red-900 focus:outline-none md:mb-0 mb-3"
-                onClick={() => onEdit(user.id)}
+                onClick={()=>onDesactivar(user.email)}
               >
                 Desactivar
               </button>

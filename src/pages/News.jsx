@@ -2,6 +2,8 @@ import { NewsAdmin } from "../components"
 import styles from "../style"
 import { useState, useEffect } from "react"
 import { noticiasFirebase, eliminarNoticiaPorCampoId } from "../services/firebase/functions/db/noticias"
+import Swal from "sweetalert2"
+import { mostrarError } from "../utils/warnings"
 
 
 const News = () => {
@@ -26,16 +28,35 @@ const News = () => {
   // Funcion eliminar para CRUD
   const handleDelete = async(id) => {
     try {
-      await eliminarNoticiaPorCampoId(id);
-      const noticiasObtenidas = await noticiasFirebase();
-      setNoticias(noticiasObtenidas);
-      console.log ('Se elimino la noticia correctamente');
+      const resultado = await Swal.fire({
+        icon: 'warning',
+        title: '¿Estás seguro?',
+        text: 'Esta acción eliminará la noticia. ¿Estás seguro de continuar?',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar',
+        customClass: {
+          container: 'font-poppins',
+          title: 'font-poppins',
+          popup: 'bg-gray-100',
+        }
+      });
+
+      if(resultado.isConfirmed){
+        await eliminarNoticiaPorCampoId(id);
+        const noticiasObtenidas = await noticiasFirebase();
+        setNoticias(noticiasObtenidas);
+        console.log ('Se elimino la noticia correctamente');
+      } else {
+        console.log("Operación de eliminación cancelada");
+      }
     } catch (error) {
       console.log('Esta noticia tuvo problemas para eliminarse'+error);
+      mostrarError();
     }
   };
-
-  
 
   return (
     <div className={`${styles.paddingY} bg-principalCol w-full overflow-hidden`}>

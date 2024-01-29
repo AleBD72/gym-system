@@ -6,6 +6,7 @@ import { ScheduleValidate } from "../../utils/validateForms";
 import { diasOption } from "../../constants";
 import { useState } from "react";
 import { crear_evento } from "../../services/firebase/functions/db/horarios";
+import { mostrarError, mostrarExito } from "../../utils/warnings";
 
 const initialValues = {
   name: "",
@@ -19,17 +20,27 @@ const AddEventForm = () => {
   const [day, setDay] = useState("");
 
   const onSubmit = async (values, { resetForm }) => {
-    const datos_evento = await crear_evento(
-      values.name,
-      values.end,
-      values.start,
-      values.trainer,
-      day
-    );
-    console.log(datos_evento);
-    if (datos_evento) {
-      resetForm();
+    try {
+      const datos_evento = await crear_evento(
+        values.name,
+        values.end,
+        values.start,
+        values.trainer,
+        day
+      );
+      console.log(datos_evento);
+      if (datos_evento) {
+        resetForm();
+        mostrarExito();
+      } else{
+        console.error("No se creó el evento, inténtalo de nuevo");
+        mostrarError();
+      }
+    } catch (error) {
+      console.error("Error al crear el evento", error);
+      mostrarError();
     }
+    
   };
 
   const { handleChange, errors, handleSubmit, values, handleReset } = useFormik(

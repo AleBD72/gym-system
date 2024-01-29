@@ -1,7 +1,7 @@
 import SuscriptionsTable from './SuscriptionsTable'
 import { useState } from 'react'
 
-const SuscriptionsAdmin = ({ users, onEdit }) => {
+const SuscriptionsAdmin = ({ users, onDesactivar }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 7;
@@ -33,7 +33,7 @@ const SuscriptionsAdmin = ({ users, onEdit }) => {
       </div>
       <SuscriptionsTable
         users={currentUsers}
-        onEdit={onEdit}
+        onDesactivar={onDesactivar}
       />
       <div className="flex justify-center mt-4">
         {Array.from({ length: Math.ceil(filteredUsers.length / usersPerPage) }, (_, index) => (

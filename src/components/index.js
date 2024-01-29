@@ -35,6 +35,7 @@ import UserProfile from "./common/UserProfile";
 import Tabs from "./common/Tabs";
 import EditProfileForm from "./common/EditProfileForm";
 import TextArea from "./common/TextArea";
+import Suscription from "./common/Suscription";
 
 //Componentes para usuarios clientes
 
@@ -90,5 +91,6 @@ export {
     InactiveUserList,
     ActivateSuscriptionForm,
     EditSuscriptionForm,
-    RecoverPasswordForm
+    RecoverPasswordForm,
+    Suscription
 };

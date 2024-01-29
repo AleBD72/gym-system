@@ -167,6 +167,68 @@ async function obtenerTodosLosUsuarios() {
   return usuarios;
 }
 
+async function obtenerUsuariosInactivos() {
+  const usersCollection = collection(db, "usuarios");
+  const q = query(usersCollection, where("status", "==", "Inactivo"));
+  const querySnapshot = await getDocs(q);
+
+  const usuarios = [];
+
+  querySnapshot.forEach((doc) => {
+    usuarios.push(doc.data());
+  });
+
+  return usuarios;
+}
+
+async function obtenerUsuariosActivos() {
+  const usersCollection = collection(db, "usuarios");
+  const q = query(usersCollection, where("status", "==", "Activo"));
+  const querySnapshot = await getDocs(q);
+
+  const usuarios = [];
+
+  querySnapshot.forEach((doc) => {
+    usuarios.push(doc.data());
+  });
+
+  return usuarios;
+}
+
+async function eliminarCamposYCambiarEstado(correo) {
+  const usuarioRef = collection(db, "usuarios");
+
+  try {
+    const querySnapshot = await getDocs(
+      query(usuarioRef, where("email", "==", correo))
+    );
+
+    if (!querySnapshot.empty) {
+      const docSnapshot = querySnapshot.docs[0];
+      const usuarioId = docSnapshot.id;
+
+      const usuarioDocRef = doc(db, "usuarios", usuarioId);
+
+      // Utiliza updateDoc para actualizar campos específicos
+      await updateDoc(usuarioDocRef, {
+        metodo_pago: null, // Establecer el campo metodo_pago a null
+        membresia: null, // Establecer el campo membresia a null
+        status: "Inactivo", // Cambiar el campo status a "inactivo"
+      });
+
+      // Ahora puedes usar la función obtenerDatosCorreo con el ID del documento
+      const usuarioActualizado = await obtener_datos_correo(correo);
+      return usuarioActualizado;
+    } else {
+      console.error("No existe este usuario");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error al actualizar campos en Firebase:", error);
+    return null;
+  }
+}
+
 export {
   create_user,
   obtenerTodosLosUsuarios,
@@ -175,5 +237,8 @@ export {
   verificar_correo,
   obtener_datos_correo,
   crear_usuario_firebase,
-  actualizar_datos_usuario
+  actualizar_datos_usuario,
+  obtenerUsuariosInactivos,
+  obtenerUsuariosActivos,
+  eliminarCamposYCambiarEstado
 };

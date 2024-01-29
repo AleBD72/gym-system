@@ -10,6 +10,7 @@ import  {
   verificar_rol,
 } from "../../services/firebase/functions/db/usuarios";
 import { useNavigate } from "react-router-dom";
+import { manejarRegistroIncorrecto, mostrarError, mostrarRegistroExitoso } from "../../utils/warnings";
 
 const initialValues = {
   email: "",
@@ -44,12 +45,23 @@ const NewUserForm = () => {
           );
           resetForm();
           console.log(creacion_usuario)
+
           if(creacion_usuario == true){
-             navigate("/login");
+            mostrarRegistroExitoso();
+            navigate("/login");
           }
+          else{
+            console.log('no se registro el usuario');
+            manejarRegistroIncorrecto();
+          }
+        }
+        else{
+          console.log('no se registro el usuario');
+          manejarRegistroIncorrecto();
         }
     } catch (error) {
       console.log(error);
+      mostrarError();
     }
   };
 

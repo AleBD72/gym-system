@@ -3,11 +3,13 @@ import { eliminarHorarioPorCampoId, horariosFirebase } from "../services/firebas
 import { Link } from "react-router-dom";
 import styles from "../style";
 import { ArrowLeftCircleIcon } from "@heroicons/react/24/solid";
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.css';
+import { mostrarError, mostrarExito } from "../utils/warnings";
 
 const ScheduleView = () => {
   const [horarios, setHorarios] = useState([]);
 
-  const [contador, setContador] = useState(0);
   useEffect(() => {
   
     const obtenerHorarios = async () => {
@@ -20,26 +22,44 @@ const ScheduleView = () => {
       }
     };
     obtenerHorarios();
-    console.log('Obtener horarios SV:'+ contador);
-    setContador(contador + 1);
+    
   }, []);
 
 
 
   const handleEliminarEvento = async(id) => {
     try {
-      // Eliminar el horario
-      await eliminarHorarioPorCampoId(id);
-      
-      // Obtener la lista actualizada de horarios
-      const horariosObtenidos = await horariosFirebase();
-      
-      // Actualizar el estado con la lista actualizada
-      setHorarios(horariosObtenidos);
-      
-      console.log("Se eliminó con éxito este evento");
+      const resultado = await Swal.fire({
+        icon: 'warning',
+        title: '¿Estás seguro?',
+        text: 'Esta acción eliminará el evento. ¿Estás seguro de continuar?',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar',
+        customClass: {
+          container: 'font-poppins',
+          title: 'font-poppins',
+          popup: 'bg-gray-100',
+        }
+      });
+  
+      if (resultado.isConfirmed) {
+        // El usuario confirmó la acción, eliminar el horario
+        await eliminarHorarioPorCampoId(id);
+        // Obtener la lista actualizada de horarios
+        const horariosObtenidos = await horariosFirebase();
+        // Actualizar el estado con la lista actualizada
+        setHorarios(horariosObtenidos);
+        console.log("Se eliminó con éxito este evento");
+        mostrarExito();
+      } else {
+        console.log("Operación de eliminación cancelada");
+      }
     } catch (error) {
       console.error("Error al eliminar el evento", error);
+      mostrarError();
     }
   };
 

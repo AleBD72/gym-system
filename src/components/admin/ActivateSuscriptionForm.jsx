@@ -5,7 +5,9 @@ import styles,{ layout } from "../../style";
 import { useFormik } from "formik";
 import { SuscriptionValidate } from "../../utils/validateForms";
 import { UserState, PaymentMethod, MembershipOption } from "../../constants";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { actualizar_datos_usuario, obtener_datos_correo } from "../../services/firebase/functions/db/usuarios";
 
 
 const initialValues = {
@@ -17,15 +19,40 @@ const initialValues = {
 
 
 const ActivateSuscriptionForm = () => {
-    const [payment, setPayment] = useState("");
-    const [membership, setMembership] = useState("");
-    const [state, setState] = useState("");
-
+   let {state} = useLocation()
+   const [payment, setPayment] = useState("");
+   const [usuario,setUsuario] = useState("")
+   const [membership, setMembership] = useState("");
+   const [status, setState] = useState("");
+    useEffect(()=>{
+      const datos_usuario = async () =>{
+        try{
+          const usuario =await obtener_datos_correo(state.email);
+          setUsuario(usuario)
+          setValues({name: (usuario.nombre +" "+ usuario.apellido)})
+        }
+        catch (error){
+          console.error(
+            "Error al obtener usuarios activos desde Firestore:",
+            error
+          );
+        }
+      }
+      datos_usuario()
+    },[])
+   
+    
     const onSubmit = async (values) => {
-        console.log(values);
+      const datos_nuevos = {
+        membresia: membership,
+        metodo_pago: payment,
+        status: status
+      }
+      const nuevos_datos = await actualizar_datos_usuario(state.email,datos_nuevos)
+      console.log(nuevos_datos)
     }
 
-    const { handleChange, errors, handleSubmit, values } = useFormik(
+    const { handleChange, errors, handleSubmit, values ,setValues } = useFormik(
         {
             initialValues,
             onSubmit,
@@ -73,7 +100,7 @@ const ActivateSuscriptionForm = () => {
             <ComboBox
                 label="Estado del usuario"
                 options={UserState}
-                selectedOption={state}
+                selectedOption={status}
                 onSelect={(selected) => setState(selected)}
                 placeholder="Seleccione el método de pago..."
                 name="state" 

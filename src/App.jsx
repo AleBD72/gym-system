@@ -30,7 +30,8 @@ import {
   SuscriptionUpdate,
   PasswordRecovery,
   NotFoundAdmin,
-  NotFoundClients
+  NotFoundClients,
+  SuscriptionUser
   
 } from "./pages/index";
 
@@ -62,11 +63,10 @@ const App = () => {
               <Route path="assistance" element={<Assistance />}></Route>
               <Route path="schedule" element={<Schedule />} />
               <Route path="news" element={<News />}></Route>
-              <Route path="suscription" element={<Suscriptions />}></Route>
-              <Route path="profile-update" element={<EditProfile />}></Route>
+              <Route path="suscription" element={<SuscriptionUser />}></Route>
+              <Route path="update-profile" element={<EditProfile />}></Route>
               <Route path="profile" element={<Profile />}></Route>
             </Route>
-
 
             <Route path="*" element={<NotFoundClients />} />
           </Route>
@@ -97,7 +97,6 @@ const App = () => {
                 path="membership-update/:id"
                 element={<MembershipUpdate />}
               ></Route>
-              <Route path="membership-edit" element={<Membership />}></Route>
               
               <Route path="update-profile" element={<EditProfile />}></Route>
               <Route path="profile" element={<Profile />}></Route>

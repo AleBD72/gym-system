@@ -8,6 +8,7 @@ import styles, { layout } from "../../style";
 import { verificar_correo } from "../../services/firebase/functions/db/usuarios";
 import { iniciar_sesion_normal } from "../../services/firebase/functions/auth/iniciar_sesion";
 import { Link } from "react-router-dom";
+import { manejarInicioSesionIncorrecto } from "../../utils/warnings";
 
 const initialValues = {
   email: "",
@@ -27,6 +28,7 @@ const LoginForm = () => {
       resetForm();
     } else {
       console.error("Este correo no existe");
+      manejarInicioSesionIncorrecto();
     }
   };
 

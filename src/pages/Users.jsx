@@ -2,11 +2,11 @@ import { actualizarRolUsuario, obtenerTodosLosUsuarios } from "../services/fireb
 
 import { UsersList } from "../components";
 import { useEffect,useState } from "react";
+import { mostrarError, mostrarExito } from "../utils/warnings";
 
 const Users = () => {
      const [usuarios, setUsuarios] = useState([]);
      
-     const [contador, setContador] = useState(0);
     useEffect(() => {
        const fetchData = async () => {
          try {
@@ -17,10 +17,7 @@ const Users = () => {
          }
        };
 
-       fetchData();
-
-       console.log('Usuarios obtener usuarios:'+ contador);
-       setContador(contador + 1);
+       fetchData(); 
     }, []);
 
     const handleEditarRol = async (useremail,userrol) => {
@@ -32,12 +29,20 @@ const Users = () => {
        } else {
          nuevoRol = "4bdb65d0-56b5-4af1-90f2-ffe939106d16";
        }
-       await actualizarRolUsuario(useremail, nuevoRol);
-       setUsuarios((prevUsuarios) =>
-         prevUsuarios.map((usuario) =>
-           usuario.email === useremail ? { ...usuario, rol: nuevoRol } : usuario
-         )
-       );
+
+       try {
+        await actualizarRolUsuario(useremail, nuevoRol);
+        setUsuarios((prevUsuarios) =>
+          prevUsuarios.map((usuario) =>
+            usuario.email === useremail ? { ...usuario, rol: nuevoRol } : usuario
+          )
+        );
+        mostrarExito();
+       } catch (error) {
+        console.error("Error al actualizar el rol:", error);
+        mostrarError();
+       }
+       
     };
 
     return (

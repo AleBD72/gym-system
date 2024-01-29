@@ -3,6 +3,7 @@ import { TextInput, Button, TextArea } from "../index";
 import { ServicesValidate } from "../../utils/validateForms";
 import { useFormik } from "formik";
 import { crear_servicio } from "../../services/firebase/functions/db/servicios";
+import { mostrarError, mostrarExito } from "../../utils/warnings";
 
 const initialValues = {
   service: "",
@@ -11,14 +12,24 @@ const initialValues = {
 
 const CreateServiceForm = () => {
   const onSubmit = async (values, {resetForm}) => {
-    const datos_servicio = await crear_servicio(
+    try {
+      const datos_servicio = await crear_servicio(
         values.service,
         values.description
-    );
-    console.log(datos_servicio);
-    if(datos_servicio){
+      );
+      
+      if(datos_servicio){
+        mostrarExito();
         resetForm();
+      }else{
+        console.error("No se creó el servicio, inténtalo de nuevo");
+        mostrarError();
+      }
+    } catch (error) {
+      console.error("Error al crear el servicio", error);
+      mostrarError();
     }
+    
   };
 
   const { handleChange, errors, handleSubmit, values, handleReset } = useFormik({

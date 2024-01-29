@@ -1,16 +1,27 @@
 import { InactiveUserList } from "../components";
+import { useEffect, useState } from "react";
+import { obtenerUsuariosInactivos } from "../services/firebase/functions/db/usuarios";
 
 
 const InactiveUser = () => {
-  const usuarios = [
-    { id: 1, nombre: 'Usuario1', apellido: 'Apellido ', email: 'correo1@correo.com', estado: 'Inactivo' },
-    { id: 2, nombre: 'Usuario2', apellido: 'Apellido ', email: 'correo2@correo.com', estado: 'Inactivo' },
-    { id: 3, nombre: 'Usuario3', apellido: 'Apellido ', email: 'correo3@correo.com', estado: 'Inactivo'  },
-    { id: 4, nombre: 'Usuario4', apellido: 'Apellido ', email: 'correo4@correo.com', estado: 'Inactivo' },
-    { id: 5, nombre: 'Usuario5', apellido: 'Apellido ', email: 'correo5@correo.com', estado: 'Inactivo'  },
-    { id: 6, nombre: 'Usuario6', apellido: 'Apellido ', email: 'correo6@correo.com', estado: 'Inactivo'  },
-    // Agrega más usuarios según sea necesario
-  ];
+  const [usuarios, setUsuarios] = useState([]);
+
+  useEffect(() => {
+    const obtenerUsuariosInactivosFirebase = async () => {
+      // Llama a tu función para obtener usuarios activos desde Firestore
+      try {
+        const usuariosInactivos = await obtenerUsuariosInactivos();
+        setUsuarios(usuariosInactivos);
+      } catch (error) {
+        console.error(
+          "Error al obtener usuarios activos desde Firestore:",
+          error
+        );
+      }
+    };
+
+    obtenerUsuariosInactivosFirebase();
+  }, []);
 
   return (
     <div className="container mx-auto p-8 bg-principalCol">
