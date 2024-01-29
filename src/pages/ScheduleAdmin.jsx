@@ -6,7 +6,12 @@ import { Link } from "react-router-dom";
 
 const ScheduleAdmin = () => {
   const [horarios, setHorarios] = useState([]);
+
+  const [contador, setContador] = useState(0);
+  
+  
   useEffect(() => {
+    
     const horarios_eventos = async () => {
       try {
         const horarios = await horariosFirebase();
@@ -17,6 +22,8 @@ const ScheduleAdmin = () => {
       }
     };
     horarios_eventos();
+    console.log('Horarios eventos 2:'+ contador);
+    setContador(contador + 1);
   }, []);
 
   return (
@@ -28,12 +35,16 @@ const ScheduleAdmin = () => {
           </h2>
           <TableSchedule horarios={horarios} />
           <div className={`${styles.flexCenter} ${styles.marginTop} text-white`}>
-            <button
-              type="button"
-              className="text-white font-poppins bg-fifthCol hover:bg-secondaryCol focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2  mt-5"
-            >
-              <Link to="/admin/home/schedule-view">Administrar Eventos y Servicios</Link>
-            </button>
+            
+              <Link to="/admin/home/schedule-view">
+                <button
+                  type="button"
+                  className="text-white font-poppins bg-fifthCol hover:bg-secondaryCol font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2  mt-5"
+                >
+                  Administrar Eventos y Servicios
+                </button>
+              </Link>
+              
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { useLocation, Navigate, Outlet, Link } from "react-router-dom";
 import { AuthContext } from "../../context/AutProvider";
 import { useContext } from "react";
-import { client, profile } from "../../assets";
+import { client } from "../../assets";
 import { cerrarSesion } from "../../services/firebase/functions/auth/cerrar_sesion";
 
 export const User_Dashboard = () => {
@@ -15,7 +15,7 @@ export const User_Dashboard = () => {
     <div className="md:flex md:min-h-screen">
       <div className="md:w-1/5 bg-principalCol px-5 py-4 bg-opacity-95">
         <h2 className="text-4xl font-bold font-poppins text-center text-white">
-          FitnesHUB.
+          FitnessHUB.
         </h2>
 
         <img
@@ -35,9 +35,9 @@ export const User_Dashboard = () => {
         <ul className="mt-5">
           <li className="text-center">
             <Link
-              to="/usuario/home/profile-update"
+              to="/usuario/home/profile"
               className={`${
-                urlActual === "/usuario/home/profile-update"
+                urlActual === "/usuario/home/profile"
                   ? "text-slate-200 bg-fifthCol px-3 py-2 rounded-md text-center font-poppins bg-opacity-65"
                   : "text-white font-poppins text-base"
               } text-xl block mt-2 hover:text-white`}
@@ -103,7 +103,7 @@ export const User_Dashboard = () => {
       <div className="flex-1 flex flex-col justify-between h-screen bg-principalCol">
         <div className="bg-principalCol py-2 flex md:justify-end items-center gap-5 justify-center bg-opacity-95 h-14">
           <div className="text-md font-mediaum text-slate-100 font-poppins">
-            {auth?.nombre} {auth?.apellido}
+            {auth?.nombre} {auth?.apellido} - Cliente
           </div>
           <div>
             <Link
@@ -123,8 +123,7 @@ export const User_Dashboard = () => {
         </div>
         <div className="bg-principalCol h-12 bg-opacity-95">
           <p className="text-center text-slate-100 leading-[2.9rem] underline font-poppins">
-            Todos los derechos reservados: FitnessHUB. 2023 Design by Camila
-            Mier
+            Todos los derechos reservados
           </p>
         </div>
       </div>

@@ -1,7 +1,6 @@
 //Form de creación de un nuevo evento en el horario
 import styles from "../../style";
 import { useFormik } from "formik";
-import { Link } from "react-router-dom";
 import { TextInput, Button, ComboBox } from "../index";
 import { ScheduleValidate } from "../../utils/validateForms";
 import { diasOption } from "../../constants";
@@ -43,25 +42,18 @@ const AddEventForm = () => {
 
   return (
     <div
-      className={`flex md:flex-row flex-col py-4 items-center justify-around translate-y-12 bg-principalCol`}
+      className={`flex md:flex-row flex-col py-4 items-center justify-around bg-principalCol`}
     >
-      <Link to={"../schedule"}>
-        <Button
-          label={"Ver Eventos"}
-          styles="text-center w-full bg-secondaryCol mt-5"
-        />
-      </Link>
-
       <div className="mt-1">
         <p className={styles.paragraph}>
           Bienvenido! Por favor ingresa los siguientes datos{" "}
         </p>
         <form onSubmit={handleSubmit} onReset={handleReset}>
-          <p className={styles.paragraph}>Datos generales:</p>
+          <p className={`${styles.paragraph} md:mt-7 mt-5`}>Datos generales:</p>
           <TextInput
             label="Nombre del evento"
             placeholder="Ingrese el nombre del evento"
-            className="md:mt-7 mt-5"
+            className="mt-3"
             name="name"
             value={values.name}
             onChange={handleChange}
@@ -86,7 +78,7 @@ const AddEventForm = () => {
             onChange={handleChange}
           />
           <small className="text-red-500 font-poppins">{errors?.trainer}</small>
-          <p className={styles.paragraph}>Horario del evento:</p>
+          <p className={`${styles.paragraph} mt-2`}>Horario del evento:</p>
           <TextInput
             label="Inicio del Evento"
             placeholder="Ingrese la hora de inicio..."

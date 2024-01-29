@@ -7,7 +7,9 @@ import { Link } from "react-router-dom";
 const MembershipsList = () => {
   const [membresias, setMembresias] = useState([]);
 
+  const [contador, setContador] = useState(0);
   useEffect(()=>{
+    
     const obtenerMembresias = async () => {
       try{
         const membresiasObtenidas = await membresiasFirebase();
@@ -18,6 +20,8 @@ const MembershipsList = () => {
       }
     }
     obtenerMembresias();
+    console.log('Obtener Membresías:'+ contador);
+    setContador(contador + 1);
   },[]);
     
 

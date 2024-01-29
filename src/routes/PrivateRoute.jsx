@@ -24,6 +24,7 @@ const PrivateRoute = ({ rol_usuario, ...props }) => {
   }
 
   return <Outlet {...props} />;
+  
 };
 
 export default PrivateRoute;

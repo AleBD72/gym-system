@@ -15,7 +15,6 @@ import {
   Membership,
   Unauthorized,
   LoginURL,
-  Payments,
   News,
   Services,
   Stats,
@@ -25,7 +24,14 @@ import {
   ServiceUpdate,
   NewCreate,
   NewUpdate,
-  EditProfile
+  EditProfile,
+  Suscriptions,
+  ActivateSuscription,
+  SuscriptionUpdate,
+  PasswordRecovery,
+  NotFoundAdmin,
+  NotFoundClients
+  
 } from "./pages/index";
 
 import { AuthProvider } from "./context/AutProvider";
@@ -41,6 +47,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/login-url" element={<LoginURL />} />
           <Route path="/user-registration" element={<UserRegistration />} />
+          <Route path="/reset-password" element={<PasswordRecovery />} />
 
           <Route
             path="/usuario/*"
@@ -55,13 +62,13 @@ const App = () => {
               <Route path="assistance" element={<Assistance />}></Route>
               <Route path="schedule" element={<Schedule />} />
               <Route path="news" element={<News />}></Route>
-              <Route path="suscription" element={<Payments />}></Route>
+              <Route path="suscription" element={<Suscriptions />}></Route>
               <Route path="profile-update" element={<EditProfile />}></Route>
               <Route path="profile" element={<Profile />}></Route>
             </Route>
 
 
-            <Route path="*" element={<NotFound />} />
+            <Route path="*" element={<NotFoundClients />} />
           </Route>
 
           <Route
@@ -94,7 +101,9 @@ const App = () => {
               
               <Route path="update-profile" element={<EditProfile />}></Route>
               <Route path="profile" element={<Profile />}></Route>
-              <Route path="suscriptions" element={<Payments />}></Route>
+              <Route path="suscriptions" element={<Suscriptions/>}></Route>
+              <Route path="activate-suscription" element={<ActivateSuscription/>}></Route>
+              <Route path="suscription-update" element={<SuscriptionUpdate/>}></Route>
               <Route path="news" element={<News />}></Route>
               <Route
                 path="new-create"
@@ -116,7 +125,7 @@ const App = () => {
               <Route path="stats" element={<Stats />}></Route>
             </Route>
 
-            <Route path="*" element={<NotFound />} />
+            <Route path="*" element={<NotFoundAdmin />} />
           </Route>
           <Route path="/unauthorized" element={<Unauthorized />} />
           <Route path="*" element={<NotFound />} />

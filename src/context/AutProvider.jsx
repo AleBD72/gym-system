@@ -17,7 +17,7 @@ const AuthProvider = ({ children }) => {
       setLoading(false);
     }
   };
-
+  
   useEffect(() => {
     const email = localStorage.getItem("correo");
     if (email) {

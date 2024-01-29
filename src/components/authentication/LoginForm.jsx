@@ -40,7 +40,7 @@ const LoginForm = () => {
 
   return (
     <div
-      className={`${layout.section} items-center justify-around translate-y-12 bg-principalCol`}
+      className={`${layout.section} items-center justify-between bg-principalCol`}
     >
       <div className=" m-5">
         <h2
@@ -49,14 +49,14 @@ const LoginForm = () => {
           INICIA SESIÓN
         </h2>
         <p className={styles.paragraph}>
-          Bienvenido! por favor ingresa tus credenciales
+          Bienvenido! Por favor ingresa tus credenciales
         </p>
 
         <form onSubmit={handleSubmit} onReset={handleReset}>
           <TextInput
             label="Correo"
             placeholder="Ingresa tu correo"
-            className="md:mt-20 mt-6"
+            className="md:mt-6 mt-3"
             type="email"
             name="email"
             onChange={handleChange}
@@ -76,22 +76,26 @@ const LoginForm = () => {
             {errors?.password}
           </small>
           <div className="font-poppins mt-3 text-end md:text-[16px] text-[13px]">
-            <p className="text-white">
-              No tienes cuenta?
-              <Link to="/user-registration" className="ml-1">
-                <span className="text-secondaryCol">Regístrate Aquí</span>
+              <Link to="/reset-password" className="ml-1">
+                <span className="text-secondaryCol">Olvidé mi contraseña</span>
               </Link>
-            </p>
           </div>
-
           <Button
             label={"Iniciar Sesión"}
             type="submit"
-            styles="text-center w-full bg-secondaryCol mt-5"
+            styles="text-center w-full bg-secondaryCol mt-3"
           />
+          <div className="font-poppins mt-3 text-center md:text-[16px] text-[13px]">
+            <p className="text-white">
+              No tienes cuenta?
+              <Link to="/user-registration" className="ml-1">
+                <span className="text-secondaryCol">Regístrate Aquí!</span>
+              </Link>
+            </p>
+          </div>
         </form>
       </div>
-      <div className="flex justify-center items-center m-5">
+      <div className="flex justify-center items-center md:ml-20 ml-0">
         <img src={login_vector} alt="imagelogin" />
       </div>
     </div>

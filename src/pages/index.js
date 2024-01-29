@@ -5,7 +5,7 @@ import Home from "./Home";
 import Unauthorized from "./Unauthorized"
 import Login from "./Login";
 import News from "./News";
-import Payments from "./Payments";
+import Suscriptions from "./Suscriptions";
 import Profile from "./Profile";
 import Schedule from "./Schedule";
 import NotFound from "./NotFound";
@@ -27,6 +27,12 @@ import ServiceUpdate from "./ServiceUpdate";
 import NewCreate from "./NewCreate";
 import NewUpdate from "./NewUpdate";
 import EditProfile from "./EditProfile";
+import ActivateSuscription from "./ActivateSuscription";
+import SuscriptionUpdate from "./SuscriptionUpdate";
+import PasswordRecovery from "./PasswordRecovery";
+import NotFoundAdmin from "./NotFoundAdmin";
+import NotFoundClients from "./NotFoundClients";
+
 
 export {
   AdminDashboard,
@@ -36,7 +42,7 @@ export {
   Home,
   Login,
   News,
-  Payments,
+  Suscriptions,
   Profile,
   Schedule,
   NotFound,
@@ -56,5 +62,10 @@ export {
   ServiceUpdate,
   NewCreate,
   NewUpdate,
-  EditProfile
+  EditProfile,
+  ActivateSuscription,
+  SuscriptionUpdate,
+  PasswordRecovery,
+  NotFoundAdmin,
+  NotFoundClients
 };

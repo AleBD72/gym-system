@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 
 const Schedule = () => {
   const [horarios,setHorarios] = useState([]);
+  const [contador, setContador] = useState(0);
+  
+  
   useEffect(()=>{
     const horarios_eventos = async () => {
       try {
@@ -16,7 +19,9 @@ const Schedule = () => {
         setHorarios([]);
       }
     };
-    horarios_eventos()
+    console.log('Obtener horarios 1:'+ contador);
+    horarios_eventos();
+    setContador(contador + 1);
   },[])
 
   return (

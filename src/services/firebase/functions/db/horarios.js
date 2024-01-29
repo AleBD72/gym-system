@@ -104,6 +104,7 @@ async function eliminarHorarioPorCampoId(campoId) {
   }
 }
 
+
 async function crear_evento(name, horaFin, horaInicio, entrenador, dia) {
   try {
     const id_evento = idv4()

@@ -9,6 +9,7 @@ const Services = () => {
   const [servicios, setServicios] = useState([]);
 
   useEffect(()=>{
+   
     const obtenerServicios = async () => {
       try{
         const serviciosObtenidos = await serviciosFirebase();
@@ -19,17 +20,23 @@ const Services = () => {
       }
     };
     obtenerServicios();
-  }, [servicios])
+  }, [])
 
 
 
   // Funciones para CRUD
-  const handleDeleteServicio = (id) => {
-    const eliminar_servicio = eliminarServicioPorCampoId(id)
-    if(eliminar_servicio){
+  const handleDeleteServicio = async(id) => {
+    try {
+      //Eliminar el servicio 
+      await eliminarServicioPorCampoId(id);
+
+      //Lista actualizada de servicio
+      const serviciosObtenidos = await serviciosFirebase();
+      setServicios(serviciosObtenidos);
       console.log('Se eliminó correctamente este servicio');
-    } else{
-      console.log('Este servicio no se ha eliminado');
+
+    } catch (error) {
+      console.log('Este servicio no se ha eliminado'+error);
     }
   };
 

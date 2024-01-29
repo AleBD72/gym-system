@@ -177,3 +177,16 @@ export const UserState = [
   {label: 'Activo', value: 'Activo'},
   {label: 'Inactivo', value: 'Inactivo'},
 ];
+
+export const PaymentMethod = [
+  {label: 'Efectivo', value: 'Efectivo'},
+  {label: 'Transferencia', value: 'Transferencia'},
+  {label: 'Tarjeta de Crédito', value: 'Tarjeta de Crédito'},
+  {label: 'Tarjeta de Débito', value: 'Tarjeta de Débito'},
+];
+
+export const MembershipOption = [
+  {label: 'Membresía 1', value: 'Membresía 1'},
+  {label: 'Membresía 2', value: 'Membresía 2'},
+  {label: 'Membresía 3', value: 'Membresía 3'},
+]

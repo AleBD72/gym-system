@@ -31,6 +31,7 @@ const MembershipsForm = ({ membresia }) => {
       );
       if (datos_actualizados) {
         console.log("datos actualizados con éxito");
+        
       } else {
         console.error("No se actualizaron los datos prueba de nuevo");
       }
@@ -45,6 +46,8 @@ const MembershipsForm = ({ membresia }) => {
     validationSchema: MembershipValidate,
   });
 
+  const [contador, setContador] = useState(0);
+
   useEffect(() => {
     if (membresia) {
       setMembership(membresia.tipo),
@@ -56,6 +59,8 @@ const MembershipsForm = ({ membresia }) => {
     } else {
       console.log("no sirve");
     }
+    console.log('Editar Membresía:'+ contador);
+    setContador(contador + 1);
   }, [membresia, setMembership, setValues]);
 
   return (
@@ -98,15 +103,6 @@ const MembershipsForm = ({ membresia }) => {
             setFieldValue={handleChange}
           />
           <small className="text-red-500 font-poppins">{errors?.genre}</small>
-          
-          {/* <TextInput
-            label="Descripción"
-            placeholder="Ingrese una descripción de la membresía "
-            className="mt-2"
-            name="description"
-            value={values.description}
-            onChange={handleChange}
-          /> */}
           <TextArea 
             label="Descripción"
             placeholder="Ingrese una descripción de la membresía "

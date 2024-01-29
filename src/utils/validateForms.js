@@ -3,6 +3,11 @@ import * as Yup from 'yup';
 //Validar campos de login
 export const LoginValidate = Yup.object().shape({
     email: Yup.string().email('Correo no válido').required('Campo requerido'),
+    password: Yup.string().required('Campo requerido')
+});
+
+export const RecoverPasswordValidate = Yup.object().shape({
+    email: Yup.string().email('Correo no válido').required('Campo requerido'),
 });
 
 //Validar campos de register
@@ -70,4 +75,8 @@ export const NewsValidate = Yup.object().shape({
     abstract: Yup.string().min(6,'Mínimo 6 caracteres').max(60, 'Máximo 20 caracteres').required('Campo obligatorio'),
     content: Yup.string().min(30,'Mínimo 6 caracteres').max(700, 'Máximo 20 caracteres').required('Campo obligatorio'),
     date: Yup.date().required('Campo obligatorio'),
-})
+});
+
+export const SuscriptionValidate = Yup.object().shape({
+    name: Yup.string().min(3, 'Mínimo 3 caracteres').max(40, 'Máximo 40 caracteres').required('Campo obligatorio'),
+});

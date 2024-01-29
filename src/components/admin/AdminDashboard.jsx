@@ -142,7 +142,7 @@ export const Admin_Dashboard = () => {
       <div className="flex-1 flex flex-col justify-between h-screen bg-principalCol">
         <div className="bg-principalCol py-2 flex md:justify-end items-center gap-5 justify-center bg-opacity-95 h-14">
           <div className="text-md font-mediaum text-slate-100 font-poppins">
-            {auth?.nombre} {auth?.apellido}
+            {auth?.nombre} {auth?.apellido} - Administrador
           </div>
           <div>
             <Link
@@ -162,7 +162,7 @@ export const Admin_Dashboard = () => {
         </div>
         <div className="bg-principalCol h-12 bg-opacity-95">
           <p className="text-center text-slate-100 leading-[2.9rem] underline font-poppins">
-            Todos los derechos reservados FitnessHUB 2023 Design by Camila Mier
+            Todos los derechos reservados 
           </p>
         </div>
       </div>

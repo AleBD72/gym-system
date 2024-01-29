@@ -63,7 +63,7 @@ const NewUserForm = () => {
 
   return (
     <div
-      className={`${layout.section} items-center justify-around translate-y-12 bg-principalCol`}
+      className={`${layout.section} items-center justify-around bg-principalCol`}
     >
       <div className=" m-5">
         <h2

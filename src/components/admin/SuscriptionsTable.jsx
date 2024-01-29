@@ -31,6 +31,12 @@ const SuscriptionsTable = ({ users, onEdit }) => {
               >
                 Editar
               </button>
+              <button
+                className="bg-red-800 text-white px-2 py-1 rounded hover:bg-red-900 focus:outline-none md:mb-0 mb-3"
+                onClick={() => onEdit(user.id)}
+              >
+                Desactivar
+              </button>
             </td>
           </tr>
         ))}

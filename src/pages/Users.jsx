@@ -5,8 +5,9 @@ import { useEffect,useState } from "react";
 
 const Users = () => {
      const [usuarios, setUsuarios] = useState([]);
-
-     useEffect(() => {
+     
+     const [contador, setContador] = useState(0);
+    useEffect(() => {
        const fetchData = async () => {
          try {
            const usuariosData = await obtenerTodosLosUsuarios();
@@ -17,7 +18,10 @@ const Users = () => {
        };
 
        fetchData();
-     }, [usuarios]);
+
+       console.log('Usuarios obtener usuarios:'+ contador);
+       setContador(contador + 1);
+    }, []);
 
     const handleEditarRol = async (useremail,userrol) => {
        

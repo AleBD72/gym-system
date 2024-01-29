@@ -8,6 +8,7 @@ const News = () => {
   //obetner datos a mostrar de la base de datos
   const [noticias, setNoticias]= useState([]);
 
+  
   useEffect(()=>{
     const obtenerNoticias = async () =>{
       try {
@@ -19,15 +20,18 @@ const News = () => {
       }
     }
     obtenerNoticias();
-  })
+    
+  }, [])
 
   // Funcion eliminar para CRUD
-  const handleDelete = (id) => {
-    const eliminar_noticia = eliminarNoticiaPorCampoId(id)
-    if (eliminar_noticia) {
+  const handleDelete = async(id) => {
+    try {
+      await eliminarNoticiaPorCampoId(id);
+      const noticiasObtenidas = await noticiasFirebase();
+      setNoticias(noticiasObtenidas);
       console.log ('Se elimino la noticia correctamente');
-    } else {
-      console.log('Esta noticia tuvo problemas para eliminarse');
+    } catch (error) {
+      console.log('Esta noticia tuvo problemas para eliminarse'+error);
     }
   };
 

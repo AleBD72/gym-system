@@ -9,11 +9,13 @@ const UserProfile = ({ user }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="font-poppins">
             <p className="text-dimWhite my-3">Cédula: {user.cedula}</p>
-            <p className="text-dimWhite mb-3">Correo: {user.email}</p>
+            <p className="text-dimWhite mb-3">Correo: <span className="text-fifthCol">{user.email}</span></p>
+            <p className="text-dimWhite my-3">Teléfono: 0{user.phone}</p>
           </div>
           <div className="font-poppins">
             <p className="text-dimWhite my-3">Fecha de Nacimiento: {user.birthdate}</p>
             <p className="text-dimWhite mb-3">Género: {user.gender}</p>
+            <p className="text-dimWhite my-3">Dirección: {user.address}</p>
           </div>
         </div>
         <Link to='../update-profile'>

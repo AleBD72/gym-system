@@ -7,7 +7,8 @@ import { mailImage } from "../../assets";
 const LoginURLValidate = () => {
   const navigate = useNavigate();
   const [destino, setDestino] = useState(""); // Utiliza un estado para almacenar el destino
-
+  
+  const [contador, setContador] = useState(0);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -35,6 +36,8 @@ const LoginURLValidate = () => {
       }
     };
     fetchData();
+    console.log('Login URL Validate:'+ contador);
+    setContador(contador + 1);
   }, [setDestino]);
 
   return (

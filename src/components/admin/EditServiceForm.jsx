@@ -1,9 +1,10 @@
-import { useEffect} from "react";
+import { useEffect, useState} from "react";
 import { ServicesValidate } from "../../utils/validateForms";
 import styles, {layout} from "../../style";
 import { TextInput, Button, TextArea } from "../index";
 import { useFormik } from "formik";
 import { actualizarServicioPorCampoId } from "../../services/firebase/functions/db/servicios";
+
 
 const initialValues = {
   service: "",
@@ -35,6 +36,7 @@ const EditServiceForm = ({ servicio }) => {
     validationSchema: ServicesValidate,
   });
 
+  const [contador, setContador] = useState(0);
   useEffect(()=>{
     if(servicio){
         setValues({
@@ -42,6 +44,8 @@ const EditServiceForm = ({ servicio }) => {
             description: servicio.descripcion || ""
         })
     }
+    console.log('Editar Servicio:'+ contador);
+    setContador(contador + 1);
   }, [servicio, setValues])
 
   return (
@@ -51,7 +55,7 @@ const EditServiceForm = ({ servicio }) => {
       <div className=" m-2">
         <h2 className={`${styles.heading2} text-center`}>Editar Servicio</h2>
         <p className={styles.paragraph}>
-          Bienvenido! Aquí puedes editar un servicio{" "}
+          Bienvenido! Aquí puedes editar los datos de un servicio{" "}
         </p>
 
         <form onSubmit={handleSubmit}>

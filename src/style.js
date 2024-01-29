@@ -14,6 +14,8 @@ const styles = {
   
     marginX: "sm:mx-16 mx-6",
     marginY: "sm:my-16 my-6",
+
+    backButton: "flex flex-row items-center"
   };
   
   export const layout = {

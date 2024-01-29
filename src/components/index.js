@@ -13,11 +13,15 @@ import CreateServiceForm from "./admin/CreateServiceForm";
 import EditServiceForm from "./admin/EditServiceForm";
 import CreateNewsForm from "./admin/CreateNewsForm";
 import EditNewsForm from "./admin/EditNewsForm";
+import InactiveUserList from "./admin/InactiveUserList";
+import ActivateSuscriptionForm from "./admin/ActivateSuscriptionForm";
+import EditSuscriptionForm from "./admin/EditSuscriptionForm";
 
 //Componnetes relacionados con la authenticación
 import LoginForm from "./authentication/LoginForm";
 import NewUserForm from "./authentication/NewUserForm"
 import LoginURLValidate from "./authentication/LoginURLValidate";
+import RecoverPasswordForm from "./authentication/RecoverPasswordForm";
 
 //Componentes de uso comun
 import Button from "./common/Button";
@@ -82,5 +86,9 @@ export {
     EditServiceForm,
     CreateServiceForm,
     EditNewsForm,
-    CreateNewsForm
+    CreateNewsForm,
+    InactiveUserList,
+    ActivateSuscriptionForm,
+    EditSuscriptionForm,
+    RecoverPasswordForm
 };

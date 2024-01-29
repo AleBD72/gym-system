@@ -13,6 +13,8 @@ const Profile = () => {
     email: auth.email,
     birthdate: auth.fecha_nacimiento,
     gender: auth.genero,
+    phone: auth.telefono,
+    address: auth.direccion
   };
 
   const [user, setUser] = useState(initialUser);

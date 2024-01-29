@@ -43,6 +43,7 @@ const EditNewsForm = ({noticia}) => {
     }
   );
 
+  const [contador, setContador] = useState(0);
   useEffect(()=>{
     if(noticia){
       setValues({
@@ -53,6 +54,8 @@ const EditNewsForm = ({noticia}) => {
         content: noticia.contenido || ""
       })
     }
+    console.log('Editar noticia:'+ contador);
+    setContador(contador + 1);
   }, [noticia, setValues])
 
   return (

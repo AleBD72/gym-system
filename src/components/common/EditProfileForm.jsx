@@ -51,7 +51,7 @@ const EditProfileForm = () => {
       cedula: values.cedula,
       genero: genero,
       telefono: values.phone,
-      dirrecion: values.address
+      direccion: values.address
       }
       const datos_actualizados =  actualizar_datos_usuario(values.email,datos_nuevos)
       console.log(datos_actualizados)
@@ -76,10 +76,11 @@ const EditProfileForm = () => {
     }
   );
 
+  const [contador, setContador] = useState(0);
   useEffect(()=>{
     if(user){
       setValues({
-         email: user.email || "",
+        email: user.email || "",
         name: user.firstName || "",
         last_name: user.lastName || "",
         birth: user.birthdate || "",
@@ -90,6 +91,8 @@ const EditProfileForm = () => {
 
       })
     }
+    console.log('Editar Perfil:'+ contador);
+    setContador(contador + 1);
   },[user,setValues])
 
   return (
