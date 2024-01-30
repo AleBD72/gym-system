@@ -1,4 +1,4 @@
-import { addDoc, collection, query, where, getDocs,updateDoc,doc } from "firebase/firestore";
+import { addDoc, collection, query, where, getDocs,updateDoc,doc,deleteDoc } from "firebase/firestore";
 import { auth, db } from "../../config_firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import enviarEnlaceVerficacion from "../auth/verificacion_correo";
@@ -194,6 +194,110 @@ async function obtenerUsuariosActivos() {
 
   return usuarios;
 }
+ export async function GuardarAsistenciaFirebase(attendedDates, userEmail) {
+   try {
+     const usuariosRef = collection(db, "usuarios");
+     const q = query(usuariosRef, where("email", "==", userEmail));
+     const querySnapshot = await getDocs(q);
+
+     // Verifica si el usuario existe
+     if (querySnapshot.empty) {
+       console.error("El usuario no existe.");
+       return;
+     }
+
+     const usuarioDoc = querySnapshot.docs[0];
+     const usuarioId = usuarioDoc.id;
+
+     // Verifica días existentes en el mes actual para este usuario
+     const asistenciasRef = collection(db, "dias_asistidos");
+     const asistenciasQuery = query(
+       asistenciasRef,
+       where("usuario", "==", userEmail),
+       where("mes", "==", new Date().getMonth() + 1) // Mes actual
+     );
+     const asistenciasSnapshot = await getDocs(asistenciasQuery);
+     const diasExistentes = asistenciasSnapshot.docs.map((doc) => ({
+       id: doc.id,
+       ...doc.data(),
+     }));
+
+     // Evita duplicados y elimina días deseleccionados
+     const acciones = attendedDates.map(async (date) => {
+       const existeDia = diasExistentes.find(
+         (dia) => dia.dia === date.getDate()
+       );
+       if (!existeDia) {
+         // Guarda la asistencia solo si el día no existe
+         await addDoc(asistenciasRef, {
+           usuario: userEmail,
+           anio: date.getFullYear(),
+           mes: date.getMonth() + 1,
+           dia: date.getDate(),
+         });
+       }
+     });
+
+     // Elimina días deseleccionados
+     diasExistentes.forEach(async (dia) => {
+       const date = new Date(dia.anio, dia.mes - 1, dia.dia);
+       if (
+         !attendedDates.some((d) => d.toDateString() === date.toDateString())
+       ) {
+         // Elimina el documento del día deseleccionado
+         const diaRef = doc(db, "dias_asistidos", dia.id);
+         await deleteDoc(diaRef);
+       }
+     });
+
+     // Espera a que todas las acciones se completen
+     await Promise.all(acciones);
+
+     console.log("Datos de asistencia guardados en Firebase.");
+   } catch (error) {
+     console.error("Error al guardar datos de asistencia en Firebase:", error);
+   }
+ }
+
+
+const obtenerFechasAsistidasDesdeFirebase = async (userEmail) => {
+  try {
+    const usuariosRef = collection(db, "usuarios");
+    const q = query(usuariosRef, where("email", "==", userEmail));
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) {
+      console.error("El usuario no existe.");
+      return [];
+    }
+
+    const usuarioDoc = querySnapshot.docs[0];
+
+    // Ahora, consulta las fechas de asistencia del usuario desde la colección "dias_asistidos"
+    const asistenciasRef = collection(db, "dias_asistidos");
+    const asistenciasQuery = query(
+      asistenciasRef,
+      where("usuario", "==", userEmail)
+    );
+    const asistenciasSnapshot = await getDocs(asistenciasQuery);
+    const fechasAsistidas = asistenciasSnapshot.docs
+      .map((asistenciaDoc) => {
+        const { anio, mes, dia } = asistenciaDoc.data();
+
+        // Formatea la fecha y asegúrate de que sea válida
+        const fechaFormateada = new Date(anio, mes - 1, dia);
+        return isNaN(fechaFormateada.getTime()) ? null : fechaFormateada;
+      })
+      .filter((fecha) => fecha !== null); // Filtra las fechas nulas (inválidas)
+    return fechasAsistidas;
+  } catch (error) {
+    console.error(
+      "Error al obtener las fechas de asistencia desde Firebase:",
+      error
+    );
+    return [];
+  }
+};
 
 async function eliminarCamposYCambiarEstado(correo) {
   const usuarioRef = collection(db, "usuarios");
@@ -238,6 +342,7 @@ export {
   obtener_datos_correo,
   crear_usuario_firebase,
   actualizar_datos_usuario,
+  obtenerFechasAsistidasDesdeFirebase,
   obtenerUsuariosInactivos,
   obtenerUsuariosActivos,
   eliminarCamposYCambiarEstado

@@ -76,4 +76,19 @@ const mostrarRegistroExitoso = () => {
   });
 };
 
-export {mostrarError, mostrarExito, manejarInicioSesionIncorrecto, manejarRegistroIncorrecto, mostrarRegistroExitoso};
+const mostrarEnvioRecuperarContraseña = () =>{
+  Swal.fire({
+    icon: 'info',
+    title: 'Recuperación de Contraseña',
+    text: 'Hemos enviado un correo electrónico de recuperación a tu dirección. Por favor, verifica tu bandeja de entrada.',
+    confirmButtonColor: '#2C666E',
+    customClass:{
+      title: 'font-poppins',
+      popup: 'bg-gray-100',
+      confirmButton: 'font-poppins',
+      container: 'font-poppins',
+    }
+  });
+}
+
+export {mostrarError, mostrarExito, manejarInicioSesionIncorrecto, manejarRegistroIncorrecto, mostrarRegistroExitoso, mostrarEnvioRecuperarContraseña};

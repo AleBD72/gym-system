@@ -3,7 +3,7 @@
 
 const TextInput = ({label, value, onChange, name, placeholder, type = 'text', className = '' }) => {
   return (
-    <div className={`mb-1 ${className}`}>
+    <div className={`mb-1 ${className} relative`}>
       <label className="block text-white font-poppins text-sm font-medium mb-2">{label}</label>
       <input
         type={type}

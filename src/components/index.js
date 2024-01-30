@@ -38,9 +38,10 @@ import TextArea from "./common/TextArea";
 import Suscription from "./common/Suscription";
 
 //Componentes para usuarios clientes
-
-import AssistanceRegister from "./user/AssistanceRegister";
 import GymCalendar from "./user/GymCalendar";
+import Buscador from "./user/Buscador";
+import Paginacion from "./user/Paginacion";
+import NoticiasList from "./user/NoticiasList";
 
 //Componentes para el home page
 import PrincipalContent from "./home/PrincipalContent";
@@ -74,7 +75,6 @@ export {
     ComboBox,
     AddEventForm,
     TableSchedule,
-    AssistanceRegister,
     UserCard,
     UsersList,
     MembershipsForm,
@@ -94,5 +94,8 @@ export {
     EditSuscriptionForm,
     RecoverPasswordForm,
     Suscription,
-    GymCalendar
+    GymCalendar,
+    Buscador,
+    Paginacion,
+    NoticiasList
 };

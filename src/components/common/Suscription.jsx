@@ -11,11 +11,11 @@ const Suscription = ({user}) => {
                 <p className="text-dimWhite mb-3">Membresía: <span className="text-fifthCol">{user.membresia}</span></p>
                 <p className="text-dimWhite my-3">Método de pago: {user.metodo_pago}</p>
               </div>
-              <div className="font-poppins">
+              {/* <div className="font-poppins">
                 <p className="text-dimWhite my-3">Valor a pagar (por mes o año): </p>
                 <p className="text-dimWhite mb-3">Tipo de membresía: </p>
                 <p className="text-dimWhite my-3">Detalles de membresía: </p>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

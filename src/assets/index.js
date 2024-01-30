@@ -24,6 +24,7 @@ import admin from "./admin.png";
 import profile from "./profile.png";
 import client from "./client.png";
 import logout from "./logout.svg";
+import fotogym from "./fotogym.jpg"
 
 export {
     dumbbel,
@@ -51,5 +52,6 @@ export {
     admin,
     profile,
     client,
-    logout
+    logout,
+    fotogym
 }

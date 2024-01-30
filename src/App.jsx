@@ -31,7 +31,9 @@ import {
   PasswordRecovery,
   NotFoundAdmin,
   NotFoundClients,
-  SuscriptionUser
+  SuscriptionUser,
+  NoticiasUsers,
+  NewsView
   
 } from "./pages/index";
 
@@ -62,7 +64,7 @@ const App = () => {
             <Route path="home" element={<UserDashboard />}>
               <Route path="assistance" element={<Assistance />}></Route>
               <Route path="schedule" element={<Schedule />} />
-              <Route path="news" element={<News />}></Route>
+              <Route path="news" element={<NoticiasUsers />}></Route>
               <Route path="suscription" element={<SuscriptionUser />}></Route>
               <Route path="update-profile" element={<EditProfile />}></Route>
               <Route path="profile" element={<Profile />}></Route>
@@ -103,6 +105,7 @@ const App = () => {
               <Route path="suscriptions" element={<Suscriptions/>}></Route>
               <Route path="activate-suscription" element={<ActivateSuscription/>}></Route>
               <Route path="suscription-update" element={<SuscriptionUpdate/>}></Route>
+              <Route path="news-preview" element={<NewsView />}></Route>
               <Route path="news" element={<News />}></Route>
               <Route
                 path="new-create"

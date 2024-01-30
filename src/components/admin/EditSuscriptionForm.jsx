@@ -4,10 +4,11 @@ import Button from "../common/Button";
 import styles, { layout } from "../../style";
 import { useFormik } from "formik";
 import { SuscriptionValidate } from "../../utils/validateForms";
-import { UserState, PaymentMethod, MembershipOption } from "../../constants";
+import { UserState, PaymentMethod } from "../../constants";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { obtener_datos_correo,actualizar_datos_usuario } from "../../services/firebase/functions/db/usuarios";
+import { membresiasFirebase } from "../../services/firebase/functions/db/membresias";
 
 const initialValues = {
   name: "",
@@ -19,7 +20,9 @@ const initialValues = {
 const EditSuscriptionForm = () => {
   const { state } = useLocation();
   const [payment, setPayment] = useState("");
-  const [membership, setMembership] = useState("");
+  const [membershipOptions, setMembershipOptions] = useState([]);
+
+  const [membership, setMembership] = useState(null);
   const [status, setState] = useState("");
   const [usuario,setUsuario] = useState({})
   
@@ -27,6 +30,13 @@ const EditSuscriptionForm = () => {
     const datos_usuario = async () => {
       try {
         const usuario = await obtener_datos_correo(state.email);
+        const membresia = await membresiasFirebase()
+        const opciones = membresia.map(({ id, nombre }) => ({
+          value: id,
+          label: nombre,
+        }));
+        setMembershipOptions(opciones);
+        
         setUsuario(usuario);
         setValues({ name: usuario.nombre + " " + usuario.apellido });
         setPayment(usuario.metodo_pago)
@@ -44,6 +54,7 @@ const EditSuscriptionForm = () => {
 
   
   const onSubmit = async (values) => {
+    console.log(membership)
     const datos_nuevos = {
       membresia: membership,
       metodo_pago: payment,
@@ -92,7 +103,7 @@ const EditSuscriptionForm = () => {
           />
           <ComboBox
             label="Membresía Seleccionada"
-            options={MembershipOption}
+            options={membershipOptions}
             selectedOption={membership}
             onSelect={(selected) => setMembership(selected)}
             placeholder="Seleccione una membresía..."

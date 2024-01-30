@@ -33,6 +33,8 @@ import PasswordRecovery from "./PasswordRecovery";
 import NotFoundAdmin from "./NotFoundAdmin";
 import NotFoundClients from "./NotFoundClients";
 import SuscriptionUser from "./SuscriptionUser";
+import NoticiasUsers from "./NoticiasUsers";
+import NewsView from "./NewsView";
 
 
 export {
@@ -69,5 +71,7 @@ export {
   PasswordRecovery,
   NotFoundAdmin,
   NotFoundClients,
-  SuscriptionUser
+  SuscriptionUser,
+  NoticiasUsers,
+  NewsView
 };

@@ -27,7 +27,9 @@ const initialValues = {
 
 const NewUserForm = () => {
   const [genero, setGenero] = useState("");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  
+
   const onSubmit = async (values, { resetForm }) => {
     try {
       const RolValido = await verificar_rol(values.rol); 
@@ -103,7 +105,7 @@ const NewUserForm = () => {
             className="mt-4"
             name="password"
             value={values.password}
-            type="password"
+            type='password'
             onChange={handleChange}
           />
           <small className="text-red-500 font-poppins">{errors?.password}</small>

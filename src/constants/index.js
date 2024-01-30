@@ -55,12 +55,12 @@ export const footerLinks = [
       {
         id: "fl-1",
         name: "Servicios",
-        link: "https://github.com/",
+        link: "services",
       },
       {
         id: "fl-2",
         name: "Contactos",
-        link: "https://github.com/",
+        link: "contacts",
       },
     ],
   },
@@ -70,17 +70,19 @@ export const footerLinks = [
       {
         id: "fl-3",
         name: "Membresías",
-        link: "https://github.com/",
+        link: "memberships",
       },
       {
         id: "fl-4",
         name: "Horarios",
         link: "https://github.com/",
+        go_to: "/login",
       },
       {
         id: "fl-5",
         name: "Noticias",
         link: "https://github.com/",
+        go_to: "/login",
       },
     ],
   },
