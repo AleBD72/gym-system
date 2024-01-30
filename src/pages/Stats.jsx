@@ -3,7 +3,7 @@ import styles from "../style";
 import { Tabs } from "../components";
 import StatsUser from "./StatsUser";
 import StatsMembership from "./StatsMembership";
-import StatsNotice from "./statsNotice";
+import StatsNotice from "./StatsNotice";
 import StatsEvent from "./StatsEvent";
 
 const Stats = () => {
