@@ -46,7 +46,7 @@ async function crear_usuario_firebase(
   rol,
   genero,
   cedula,
-  estado
+  status
 ) {
   const correo_existe = await verificar_correo(email);
   if (correo_existe) {
@@ -61,7 +61,7 @@ async function crear_usuario_firebase(
       rol,
       genero,
       cedula,
-      estado
+      status
     );
 
     if (!datos_usuario_firebase) {
