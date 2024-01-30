@@ -15,7 +15,7 @@ const StatsNotice = () =>{
 
         // Cambios en la configuración para ajustar el tamaño y color
         new Chart(ctx, {
-          type: "pie",
+          type: "doughnut",
           data: {
             labels: autorNotica,
             datasets: [
