@@ -40,6 +40,7 @@ import Suscription from "./common/Suscription";
 //Componentes para usuarios clientes
 
 import AssistanceRegister from "./user/AssistanceRegister";
+import GymCalendar from "./user/GymCalendar";
 
 //Componentes para el home page
 import PrincipalContent from "./home/PrincipalContent";
@@ -92,5 +93,6 @@ export {
     ActivateSuscriptionForm,
     EditSuscriptionForm,
     RecoverPasswordForm,
-    Suscription
+    Suscription,
+    GymCalendar
 };

@@ -19,7 +19,7 @@ const SuscriptionUser = () => {
     <div>
         <Suscription user={user}/>
         <div className="text-center  mt-4">
-           <small className="text-secondaryCol font-poppins text-center font-semibold">No olvides activar tu suscipción para obtener la información de tu suscripción!</small>
+           <small className="text-fifthCol font-poppins text-center font-semibold">No olvides activar tu suscipción para obtener la información de tu membresía!</small>
         </div>
     </div>
   )
