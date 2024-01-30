@@ -1,5 +1,5 @@
 import dumbbel from "./dumbbel.svg";
-import shoe from "./Shoe.svg";
+import shoe from "./shoe.svg";
 import weighingScale from "./weighingScale.svg";
 import menu from "./menu.svg";
 import close from "./close.svg";
