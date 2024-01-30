@@ -23,7 +23,7 @@ const LoginForm = () => {
       const datos_user = await iniciar_sesion_normal(values.email, values.password);
       if (datos_user) {
         localStorage.setItem("correo", values.email);
-        window.location.href = "/login-url";
+        window.location.href = "/loginurl";
       }
       resetForm();
     } else {
