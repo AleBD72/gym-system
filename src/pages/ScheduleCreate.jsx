@@ -5,7 +5,7 @@ import { ArrowLeftCircleIcon } from "@heroicons/react/24/solid";
 
 const ScheduleCreate = () => {
     return (
-        <div className={`${styles.paddingY} bg-principalCol w-full overflow-hidden h-screen`}>
+        <div className={`${styles.paddingY} bg-principalCol w-full overflow-hidden`}>
             <div className={`${styles.paddingX} ${styles.flexCenter} bg-principalCol`}>
                 <div className={`${styles.boxWidth} `}>
                 <Link to="../schedule-view" className={`${styles.backButton} text-white font-poppins`}>
