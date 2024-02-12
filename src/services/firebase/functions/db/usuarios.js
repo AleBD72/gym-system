@@ -11,7 +11,7 @@ async function create_user(
   rol,
   genero,
   cedula,
-  estado
+  status
 ) {
   const usuario_nuevo = {
     nombre,
@@ -21,7 +21,7 @@ async function create_user(
     rol,
     genero,
     cedula,
-    estado
+    status
   };
 
   const docRef = collection(db, "usuarios");
