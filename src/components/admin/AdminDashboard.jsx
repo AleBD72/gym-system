@@ -1,7 +1,7 @@
 import { Link, Navigate, Outlet, useLocation } from "react-router-dom";
 import { AuthContext } from "../../context/AutProvider";
 import { useContext } from "react";
-import { admin, profile } from "../../assets";
+import { admin } from "../../assets";
 import { cerrarSesion } from "../../services/firebase/functions/auth/cerrar_sesion";
 
 export const Admin_Dashboard = () => {

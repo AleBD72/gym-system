@@ -34,7 +34,7 @@ const Contacts = () => {
                             </ul>
                         </div>
                         <div className="md:w-1/2 w-full md:mt-0 mt-3 md:ml-5 ml-0">
-                            <img src={fotogym} alt="fotoGimnasio" className="rounded-xl w-full" />
+                            <img src={fotogym} alt="fotoGimnasio" className="rounded-xl w-full"/>
                         </div>
                     </div>
                 </div>

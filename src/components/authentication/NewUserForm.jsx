@@ -2,7 +2,7 @@ import { ComboBox, Button, TextInput } from "../index";
 import { useFormik } from "formik";
 import { RegisterValidate } from "../../utils/validateForms";
 import styles, { layout } from "../../style";
-import { register_image } from "../../assets";
+import { scheduleImage } from "../../assets";
 import { GenderOptions } from "../../constants";
 import { useState } from "react";
 import  {
@@ -169,7 +169,7 @@ const NewUserForm = () => {
         </form>
       </div>
       <div className="flex justify-center items-center m-5">
-        <img src={register_image} alt="imageregister" />
+        <img src={scheduleImage} alt="imageregister"/>
       </div>
     </div>
   );

@@ -78,7 +78,7 @@ const RecoverPasswordForm = () => {
         </form>
       </div>
       <div className="flex justify-center items-center md:ml-20 ml-0">
-        <img src={password_reset} alt="resetpassword" />
+        <img src={password_reset} alt="resetpassword"/>
       </div>
     </div>
   );
