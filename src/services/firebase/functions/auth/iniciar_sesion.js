@@ -1,5 +1,6 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config_firebase";
+import { manejarInicioSesionIncorrecto, manejarVerificacionIncorrectaCorreo } from "../../../../utils/warnings";
 
 async function iniciar_sesion_normal(email, password) {
   try {
@@ -12,6 +13,7 @@ async function iniciar_sesion_normal(email, password) {
 
     if (!user.emailVerified) {
       console.log("Correo electrónico no confirmado.");
+      manejarVerificacionIncorrectaCorreo();
       return false;
     }
 
@@ -20,6 +22,7 @@ async function iniciar_sesion_normal(email, password) {
     return true;
   } catch (error) {
     console.error("Error al iniciar sesión:", error.message);
+    manejarInicioSesionIncorrecto();
     return false;
   }
 }

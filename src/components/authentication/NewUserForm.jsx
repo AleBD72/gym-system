@@ -83,7 +83,7 @@ const NewUserForm = () => {
         <h2
           className={`text-center text-secondaryCol font-poppins font-medium xs:text-[32px] text-[30px] xs:leading-[58.8px] leading-[48.8px] w-full`}
         >
-          Registro de Nuevo Usuario
+          REGISTRO DE USUARIOS
         </h2>
         <p className={styles.paragraph}>
           Bienvenido! Por favor ingresa los siguientes datos{" "}

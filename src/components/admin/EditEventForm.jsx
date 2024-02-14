@@ -32,6 +32,12 @@ const EditEventForm = ({ horario }) => {
           cancelButtonColor: '#d33',
           confirmButtonText: 'Sí, actualizar',
           cancelButtonText: 'Cancelar',
+          customClass:{
+            title: 'font-poppins',
+            popup: 'bg-gray-100',
+            confirmButton: 'font-poppins',
+            container: 'font-poppins',
+          }
         });
 
         if (resultado.isConfirmed) {

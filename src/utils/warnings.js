@@ -34,8 +34,24 @@ const mostrarExito = () => {
 const manejarInicioSesionIncorrecto = () => {
   Swal.fire({
     icon: 'error',
-    title: 'Inicio de sesión incorrecto',
+    title: 'Credenciales incorrectas',
     text: 'Verifica tus credenciales e inténtalo de nuevo.',
+    confirmButtonColor: '#E74646',
+    customClass:{
+      title: 'font-poppins',
+      popup: 'bg-gray-100',
+      confirmButton: 'font-poppins',
+      container: 'font-poppins',
+    }
+  });
+};
+
+//Manejar falta de verificación de correo
+const manejarVerificacionIncorrectaCorreo = () => {
+  Swal.fire({
+    icon: 'error',
+    title: 'Inicio de sesión incorrecto',
+    text: 'Verifica tu correo antes de iniciar sesión',
     confirmButtonColor: '#2C666E',
     customClass:{
       title: 'font-poppins',
@@ -91,4 +107,4 @@ const mostrarEnvioRecuperarContraseña = () =>{
   });
 }
 
-export {mostrarError, mostrarExito, manejarInicioSesionIncorrecto, manejarRegistroIncorrecto, mostrarRegistroExitoso, mostrarEnvioRecuperarContraseña};
+export {mostrarError, mostrarExito, manejarInicioSesionIncorrecto, manejarRegistroIncorrecto, mostrarRegistroExitoso, mostrarEnvioRecuperarContraseña, manejarVerificacionIncorrectaCorreo};

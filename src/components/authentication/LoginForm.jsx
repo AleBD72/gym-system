@@ -4,7 +4,7 @@ import Button from "../common/Button";
 import { useFormik } from "formik";
 import { LoginValidate } from "../../utils/validateForms";
 import { login_vector } from "../../assets";
-import styles, { layout } from "../../style";
+import styles from "../../style";
 import { verificar_correo } from "../../services/firebase/functions/db/usuarios";
 import { iniciar_sesion_normal } from "../../services/firebase/functions/auth/iniciar_sesion";
 import { Link } from "react-router-dom";
@@ -42,13 +42,13 @@ const LoginForm = () => {
 
   return (
     <div
-      className={`${layout.section} items-center justify-between bg-principalCol`}
+      className={`flex md:flex-row flex-col items-center justify-around bg-principalCol`}
     >
-      <div className=" m-5">
+      <div className="m-5">
         <h2
           className={`text-center text-secondaryCol font-poppins font-medium xs:text-[32px] text-[30px] xs:leading-[58.8px] leading-[48.8px] w-full`}
         >
-          INICIA SESIÓN
+           INICIA SESIÓN
         </h2>
         <p className={styles.paragraph}>
           Bienvenido! Por favor ingresa tus credenciales
@@ -97,7 +97,7 @@ const LoginForm = () => {
           </div>
         </form>
       </div>
-      <div className="flex justify-center items-center md:ml-20 ml-0">
+      <div className="flex justify-center items-center md:ml-20 ml-0 mb-5">
         <img src={login_vector} alt="imagelogin" />
       </div>
     </div>
