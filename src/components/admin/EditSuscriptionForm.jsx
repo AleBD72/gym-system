@@ -9,6 +9,8 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { obtener_datos_correo,actualizar_datos_usuario } from "../../services/firebase/functions/db/usuarios";
 import { membresiasFirebase } from "../../services/firebase/functions/db/membresias";
+import { mostrarError, mostrarExito } from "../../utils/warnings";
+import Swal from "sweetalert2";
 
 const initialValues = {
   name: "",
@@ -54,17 +56,51 @@ const EditSuscriptionForm = () => {
 
   
   const onSubmit = async (values) => {
+    if(values){
+      try {
+        const resultado = await Swal.fire({
+          icon: 'warning',
+          title: '¿Estás seguro?',
+          text: 'Esta acción actualizará la suscripción del usuario. ¿Estás seguro de continuar?',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sí, actualizar',
+          cancelButtonText: 'Cancelar',
+          customClass: {
+            container: 'font-poppins',
+            title: 'font-poppins',
+            popup: 'bg-gray-100',
+          }
+        });
+
+        if(resultado.isConfirmed){
+          const datos_nuevos = {
+            membresia: membership,
+            metodo_pago: payment,
+            status: status,
+          };
+          const nuevos_datos = await actualizar_datos_usuario(
+            state.email,
+            datos_nuevos
+          );
+          
+          if(!nuevos_datos){
+            console.log("datos actualizados con éxito");
+            mostrarExito();
+          }else{
+            console.log("datos no actualizados");
+            mostrarError();
+          }
+        }
+      } catch (error) {
+        mostrarError();
+      }
+    }else{
+      console.log('Operación Invalida');
+    }
     console.log(membership)
-    const datos_nuevos = {
-      membresia: membership,
-      metodo_pago: payment,
-      status: status,
-    };
-    const nuevos_datos = await actualizar_datos_usuario(
-      state.email,
-      datos_nuevos
-    );
-    console.log(nuevos_datos);
+    
   };
   const { handleChange, errors, handleSubmit, values, setValues } = useFormik({
     initialValues,

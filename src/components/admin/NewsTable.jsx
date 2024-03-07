@@ -44,7 +44,7 @@ const NewsTable = ({ news, onDelete}) => {
             </tbody>
           </table>
         </div>
-      ) : (<p className={`${styles.paragraph} text-center mt-5`}>No hay servicios registrados...</p>)}
+      ) : (<p className={`${styles.paragraph} text-center mt-5`}>No hay noticias registradas...</p>)}
     </div>
     
   )

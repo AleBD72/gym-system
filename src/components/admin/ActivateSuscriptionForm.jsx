@@ -12,6 +12,7 @@ import {
   obtener_datos_correo,
 } from "../../services/firebase/functions/db/usuarios";
 import { membresiasFirebase } from "../../services/firebase/functions/db/membresias";
+import { mostrarError, mostrarExito } from "../../utils/warnings";
 
 const initialValues = {
   name: "",
@@ -51,16 +52,22 @@ const ActivateSuscriptionForm = () => {
   }, []);
 
   const onSubmit = async (values) => {
-    const datos_nuevos = {
-      membresia: membership,
-      metodo_pago: payment,
-      status: status,
-    };
-    const nuevos_datos = await actualizar_datos_usuario(
-      state.email,
-      datos_nuevos
-    );
-    console.log(nuevos_datos);
+    try {
+      const datos_nuevos = {
+        membresia: membership,
+        metodo_pago: payment,
+        status: status,
+      };
+      const nuevos_datos = await actualizar_datos_usuario(
+        state.email,
+        datos_nuevos
+      );
+      console.log(nuevos_datos);
+      mostrarExito();
+    } catch (error) {
+      mostrarError();
+    }
+    
   };
 
   const { handleChange, errors, handleSubmit, values, setValues } = useFormik({

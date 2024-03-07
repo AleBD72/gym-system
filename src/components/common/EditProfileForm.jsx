@@ -50,6 +50,11 @@ const EditProfileForm = () => {
           cancelButtonColor: '#d33',
           confirmButtonText: 'Sí, actualizar',
           cancelButtonText: 'Cancelar',
+          customClass: {
+            container: 'font-poppins',
+            title: 'font-poppins',
+            popup: 'bg-gray-100',
+          }
         });
 
         if(resultado.isConfirmed){

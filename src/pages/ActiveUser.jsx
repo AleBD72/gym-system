@@ -2,6 +2,8 @@ import styles from "../style"
 import { useEffect, useState } from "react";
 import { SuscriptionsAdmin } from "../components"
 import { eliminarCamposYCambiarEstado, obtenerUsuariosActivos } from "../services/firebase/functions/db/usuarios"
+import Swal from "sweetalert2"
+import { mostrarError } from "../utils/warnings";
 
 
 const ActiveUser = () => {
@@ -26,10 +28,33 @@ const ActiveUser = () => {
 
     //Función del CRUD
     const handleDesactivar = async(id) => {
-        const datos_nuevos = await eliminarCamposYCambiarEstado(id)
-      console.log(datos_nuevos)
-      const usuariosActivos = await obtenerUsuariosActivos();
-      setUsersActive(usuariosActivos);
+      try {
+        const resultado = await Swal.fire({
+          icon: 'warning',
+          title: '¿Estás seguro?',
+          text: 'Esta acción cambiará el estado del usuario y eliminará su información de membresía. ¿Estás seguro de continuar?',
+          showCancelButton: true,
+          confirmButtonColor: '#d33',
+          cancelButtonColor: '#3085d6',
+          confirmButtonText: 'Sí, desactivar',
+          cancelButtonText: 'Cancelar',
+          customClass: {
+            container: 'font-poppins',
+            title: 'font-poppins',
+            popup: 'bg-gray-100',
+          }
+        });
+
+        if(resultado.isConfirmed){
+          const datos_nuevos = await eliminarCamposYCambiarEstado(id)
+          console.log(datos_nuevos)
+          const usuariosActivos = await obtenerUsuariosActivos();
+          setUsersActive(usuariosActivos);
+        }
+      } catch (error) {
+        mostrarError();
+      }
+        
     };
 
     return (
